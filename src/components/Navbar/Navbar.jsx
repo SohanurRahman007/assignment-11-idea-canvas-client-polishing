@@ -7,7 +7,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const [showLogout, setShowLogout] = useState(false);
+  // const [showLogout, setShowLogout] = useState(false);
   const { user, logOut } = useContext(AuthContext);
 
   useEffect(() => {
@@ -19,9 +19,9 @@ const Navbar = () => {
     setTheme(e.target.checked ? "dark" : "light");
   };
 
-  const handleAvatarClick = () => {
-    setShowLogout((prev) => !prev);
-  };
+  // const handleAvatarClick = () => {
+  //   setShowLogout((prev) => !prev);
+  // };
 
   const handleLogout = async () => {
     try {
@@ -143,7 +143,7 @@ const Navbar = () => {
                 <span className="text-orange-500">Login</span>
               </Link>
               <Link to="/register" className="btn text-md font-semibold">
-                <span className="text-blue-500">Register</span>
+                <span className="">Register</span>
               </Link>
             </>
           )}

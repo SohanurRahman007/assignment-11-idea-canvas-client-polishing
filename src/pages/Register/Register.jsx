@@ -19,27 +19,20 @@ const Register = () => {
       formData.entries()
     );
 
-    // ✅ Individual Password Validations
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters long.");
-      return;
+    // ✅ Password validations
+    if (password.length < 6) {
+      return setError("Password must be at least 6 characters long.");
     }
-
     if (!/[A-Z]/.test(password)) {
-      setError("Password must include at least one uppercase letter.");
-      return;
+      return setError("Password must include at least one uppercase letter.");
     }
-
-    if (!/[a-z]/.test(password)) {
-      setError("Password must include at least one lowercase letter.");
-      return;
-    }
-
     if (!/[!@#$%^&*]/.test(password)) {
-      setError(
+      return setError(
         "Password must include at least one special character (!@#$%^&*)."
       );
-      return;
+    }
+    if (!/[0-9]/.test(password)) {
+      return setError("Password must include at least one number (0-9).");
     }
 
     // create User
