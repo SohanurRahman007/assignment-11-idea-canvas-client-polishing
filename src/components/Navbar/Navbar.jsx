@@ -9,7 +9,6 @@ const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [showLogout, setShowLogout] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -17,15 +16,25 @@ const Navbar = () => {
   }, [theme]);
 
   const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    setTheme(e.target.checked ? "dark" : "light");
   };
 
   const handleAvatarClick = () => {
     setShowLogout((prev) => !prev);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      await Swal.fire({
+        title: "Logged out successfully!",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   const navItems = (
@@ -42,7 +51,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to="/allBlogs" className="text-md font-semibold navLink">
-          All blogs
+          All Blogs
         </NavLink>
       </li>
       <li>
@@ -57,20 +66,6 @@ const Navbar = () => {
       </li>
     </>
   );
-
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      await Swal.fire({
-        title: "Logged out successfully!",
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
 
   return (
     <div>
@@ -95,17 +90,17 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
             >
               {navItems}
             </ul>
           </div>
           <Link
             to="/"
-            className=" text-2xl font-semibold cursor-pointer flex justify-center items-center"
+            className="text-2xl font-semibold cursor-pointer flex items-center"
           >
-            <img src={logo} className="h-12 w-12 rounded-2xl" alt="" />
-            <span className="flex ml-1">
+            <img src={logo} className="h-12 w-12 rounded-2xl" alt="Logo" />
+            <span className="ml-1">
               Idea <span className="text-orange-500 font-bold">C</span>anvas
             </span>
           </Link>
@@ -115,45 +110,42 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
 
-        <div className="navbar-end gap-3 relative">
+        <div className="navbar-end gap-3">
           {user ? (
-            <div className="relative">
+            <div className="flex items-center gap-3">
               <div
                 className="tooltip tooltip-left"
                 data-tip={user?.displayName}
               >
-                <button
-                  onClick={handleAvatarClick}
-                  className="btn h-10 w-10 p-0 overflow-hidden rounded-sm"
-                >
+                <div className="h-10 w-10 rounded-full overflow-hidden">
                   {user?.photoURL ? (
                     <img
                       src={user.photoURL}
                       alt="User Avatar"
-                      className="w-full h-full object-cover rounded-sm"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <FaUserSecret className="text-white text-xl" />
                   )}
-                </button>
+                </div>
               </div>
 
-              {/* Logout Dropdown */}
-              {showLogout && (
-                <div className="absolute -right-4 mt-2 bg-gray-50 text-white dark:bg-gray-800  border rounded shadow z-50">
-                  <button
-                    onClick={handleLogout}
-                    className="block w-full px-4 py-2 cursor-pointer"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
+              <button
+                onClick={handleLogout}
+                className="btn btn-sm bg-orange-500 text-white hover:bg-orange-500"
+              >
+                Logout
+              </button>
             </div>
           ) : (
-            <Link to="/login" className="btn text-xl font-semibold">
-              <span className="text-orange-500">Login</span>
-            </Link>
+            <>
+              <Link to="/login" className="btn text-md font-semibold">
+                <span className="text-orange-500">Login</span>
+              </Link>
+              <Link to="/register" className="btn text-md font-semibold">
+                <span className="text-blue-500">Register</span>
+              </Link>
+            </>
           )}
 
           {/* Theme Toggle */}
