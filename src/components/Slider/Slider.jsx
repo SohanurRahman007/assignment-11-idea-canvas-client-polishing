@@ -41,7 +41,7 @@ const Slider = () => {
           stay informed.
         </p>
       </div>
-      <div className="wrapper">
+      <div className="wrapper shadow-sm rounded-md">
         <div className="scene">
           <div className="carousel keen-slider" ref={sliderRef}>
             <div className="carousel__cell number-slide1 ">
