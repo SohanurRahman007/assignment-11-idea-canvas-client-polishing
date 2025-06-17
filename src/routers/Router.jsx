@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import RecentBlogs from "../components/RecentBlogs/RecentBlogs";
+import PrivetRoute from "./PrivetRoute";
+import AddBlog from "../pages/AddBlog/AddBlog";
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +18,14 @@ export const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
-
+      {
+        path: "/addBlog",
+        element: (
+          <PrivetRoute>
+            <AddBlog></AddBlog>
+          </PrivetRoute>
+        ),
+      },
       {
         path: "/login",
         Component: Login,

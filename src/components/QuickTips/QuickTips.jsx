@@ -5,8 +5,8 @@ const QuickTips = () => {
     <div>
       <section className="py-12 shadow-sm rounded-md ">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            💡 Quick Tips for You
+          <h2 className="text-3xl font-bold text-center mb-3 mt-4 text-orange-600">
+            Quick Tips for You
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
