@@ -9,6 +9,7 @@ import AddBlog from "../pages/AddBlog/AddBlog";
 import WishlistPage from "../pages/WishlistPage/WishlistPage";
 import BlogDetailsPage from "../pages/BlogDetailsPag/BlogDetailsPag";
 import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
+import BlogsPage from "../pages/BlogsPage/BlogsPage";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
             <UpdateBlog />
           </PrivetRoute>
         ),
+      },
+      {
+        path: "/allBlogs",
+        Component: BlogsPage,
       },
       {
         path: "/wishlist",
