@@ -1,33 +1,47 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
 
-const RecentBlogs = ({ user }) => {
+const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get("http://localhost:3000/recent").then((res) => setBlogs(res.data));
   }, []);
 
-  const handleWishlist = async (blogId) => {
+  const handleWishlist = async (blog) => {
     if (!user?.email) {
       return toast.error("Please login to add to wishlist");
     }
 
+    const wishlistItem = {
+      blogId: blog._id,
+      title: blog.title,
+      image: blog.image,
+      category: blog.category,
+      userEmail: user.email,
+    };
+
     try {
-      await axios.post("http://localhost:3000/recent", {
-        blogId,
-        userEmail: user.email,
-      });
-      toast.success("Added to wishlist!");
+      const res = await axios.post(
+        "http://localhost:3000/wishlist",
+        wishlistItem
+      );
+      if (res.data.success) {
+        toast.success("Added to wishlist!");
+      } else {
+        toast(res.data.message || "Already in wishlist");
+      }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Error");
+      toast.error(error.response?.data?.message || "Failed to add");
     }
   };
 
   return (
-    <>
+    <div className="mt-6">
       <h1 className="text-3xl md:text-4xl font-bold text-center text-orange-500 mb-2">
         Recent Blog Posts
       </h1>
@@ -40,7 +54,7 @@ const RecentBlogs = ({ user }) => {
         {blogs.map((blog) => (
           <div
             key={blog._id}
-            className="max-w-full rounded-md shadow-md bg-white dark:bg-gray-800 dark:text-white"
+            className="max-w-full rounded-md shadow-sm shadow-amber-500"
           >
             <img
               src={blog.image}
@@ -50,7 +64,7 @@ const RecentBlogs = ({ user }) => {
             <div className="flex flex-col justify-between p-6 space-y-4">
               <div className="space-y-2">
                 <h3 className="text-2xl font-semibold">{blog.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-gray-500 ">
                   {blog.shortDescription?.slice(0, 100)}...
                 </p>
               </div>
@@ -62,7 +76,7 @@ const RecentBlogs = ({ user }) => {
                   Details
                 </Link>
                 <button
-                  onClick={() => handleWishlist(blog._id)}
+                  onClick={() => handleWishlist(blog)}
                   className="w-full text-center px-4 py-2 font-semibold border border-orange-500 text-orange-500 cursor-pointer rounded hover:bg-orange-100 dark:hover:bg-gray-700 transition"
                 >
                   Wishlist
@@ -72,7 +86,7 @@ const RecentBlogs = ({ user }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

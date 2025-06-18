@@ -148,7 +148,7 @@ const AddBlog = () => {
             <div className="col-span-full">
               <button
                 type="submit"
-                className="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700 transition"
+                className="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700 transition cursor-pointer"
               >
                 Submit Blog
               </button>
