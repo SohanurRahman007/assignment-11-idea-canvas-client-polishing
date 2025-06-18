@@ -3,6 +3,7 @@ import Slider from "../../components/Slider/Slider";
 import Banner from "../../components/Banner/Banner";
 import QuickTips from "../../components/QuickTips/QuickTips";
 import RecentBlogs from "../../components/RecentBlogs/RecentBlogs";
+import Newsletter from "../../components/Newsletter/Newsletter";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <RecentBlogs></RecentBlogs>
       <Slider></Slider>
       <QuickTips></QuickTips>
+      <Newsletter></Newsletter>
     </div>
   );
 };
