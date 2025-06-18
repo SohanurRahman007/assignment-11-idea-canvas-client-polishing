@@ -1,22 +1,32 @@
 import axios from "axios";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+} from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom"; // ✅ FIXED HERE
+import { Link } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import Loading from "../../components/Loading/Loading";
 
 const WishlistPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+
   const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/wishlist?email=${user.email}`)
+        .get(
+          `https://idea-canvas-server.vercel.app/wishlist?email=${user.email}`
+        )
         .then((res) => setWishlist(res.data))
         .catch((err) => {
           console.log(err);
@@ -25,18 +35,20 @@ const WishlistPage = () => {
     }
   }, [user]);
 
-  const handleRemove = async (id) => {
+  const handleRemove = useCallback(async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/wishlist/${id}`);
+      await axios.delete(
+        `https://idea-canvas-server.vercel.app/wishlist/${id}`
+      );
       toast.success("Removed from wishlist");
       setWishlist((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       console.log(err);
       toast.error("Failed to remove");
     }
-  };
+  }, []);
 
-  // Table columns
+  // Table columns configuration
   const columns = useMemo(
     () => [
       {
@@ -87,6 +99,10 @@ const WishlistPage = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="mt-10 max-w-6xl mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
@@ -96,7 +112,7 @@ const WishlistPage = () => {
       {wishlist.length === 0 ? (
         <p className="text-center text-gray-500">No wishlisted blogs yet.</p>
       ) : (
-        <div className="overflow-x-auto border-none rounded-md shadow-lg">
+        <div className="overflow-x-auto rounded-md shadow-lg border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-orange-100 text-left">
               {table.getHeaderGroups().map((headerGroup) => (

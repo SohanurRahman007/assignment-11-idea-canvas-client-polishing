@@ -3,13 +3,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
+import Loading from "../Loading/Loading";
 
 const RecentBlogs = () => {
   const [blogs, setBlogs] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/recent").then((res) => setBlogs(res.data));
+    axios
+      .get("https://idea-canvas-server.vercel.app/recent")
+      .then((res) => setBlogs(res.data));
   }, []);
 
   const handleWishlist = async (blog) => {
@@ -27,7 +30,7 @@ const RecentBlogs = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/wishlist",
+        "https://idea-canvas-server.vercel.app/wishlist",
         wishlistItem
       );
       if (res.data.success) {
@@ -39,6 +42,10 @@ const RecentBlogs = () => {
       toast.error(error.response?.data?.message || "Failed to add");
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="mt-6">

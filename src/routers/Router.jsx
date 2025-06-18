@@ -10,6 +10,7 @@ import WishlistPage from "../pages/WishlistPage/WishlistPage";
 import BlogDetailsPage from "../pages/BlogDetailsPag/BlogDetailsPag";
 import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
 import BlogsPage from "../pages/BlogsPage/BlogsPage";
+import TopBlogsPage from "../pages/TopBlogsPage/TopBlogsPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        Component: WishlistPage,
+        element: (
+          <PrivetRoute>
+            <WishlistPage></WishlistPage>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/featuredBlogs",
+        Component: TopBlogsPage,
       },
       {
         path: "/login",

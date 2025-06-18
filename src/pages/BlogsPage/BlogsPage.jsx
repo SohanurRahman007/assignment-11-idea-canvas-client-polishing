@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const categories = ["All", "Tech", "Life", "Education", "Business"];
 
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
+  const { loading } = useContext(AuthContext);
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -16,7 +19,10 @@ const BlogsPage = () => {
       if (category !== "All") params.category = category;
       if (search.trim()) params.search = search.trim();
 
-      const res = await axios.get("http://localhost:3000/blogs", { params });
+      const res = await axios.get(
+        "https://idea-canvas-server.vercel.app/blogs",
+        { params }
+      );
       setBlogs(res.data);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
@@ -35,14 +41,19 @@ const BlogsPage = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/wishlist", { blogId, userEmail });
+      await axios.post("https://idea-canvas-server.vercel.app/wishlist", {
+        blogId,
+        userEmail,
+      });
       alert("Added to wishlist");
     } catch (error) {
       alert("Error adding to wishlist");
       console.log(error);
     }
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="max-w-6xl mx-auto p-4">
       {/* Filter and Search Bar */}

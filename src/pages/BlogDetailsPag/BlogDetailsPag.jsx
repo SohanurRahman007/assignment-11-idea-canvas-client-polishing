@@ -15,14 +15,18 @@ const BlogDetailsPage = () => {
 
   useEffect(() => {
     // Fetch blog details
-    axios.get(`http://localhost:3000/blog/${id}`).then((res) => {
-      setBlog(res.data);
-    });
+    axios
+      .get(`https://idea-canvas-server.vercel.app/blog/${id}`)
+      .then((res) => {
+        setBlog(res.data);
+      });
 
     // Fetch comments
-    axios.get(`http://localhost:3000/comments/${id}`).then((res) => {
-      setComments(res.data);
-    });
+    axios
+      .get(`https://idea-canvas-server.vercel.app/comments/${id}`)
+      .then((res) => {
+        setComments(res.data);
+      });
   }, [id]);
 
   const handleComment = async () => {
@@ -37,7 +41,7 @@ const BlogDetailsPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/comments",
+        "https://idea-canvas-server.vercel.app/comments",
         commentData
       );
       if (res.data.success) {

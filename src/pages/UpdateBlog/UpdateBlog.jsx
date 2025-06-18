@@ -23,7 +23,7 @@ const UpdateBlog = () => {
   useEffect(() => {
     // Fetch blog data by id to prefill form
     axios
-      .get(`http://localhost:3000/blog/${id}`)
+      .get(`https://idea-canvas-server.vercel.app/blog/${id}`)
       .then((res) => {
         const blog = res.data;
         // Check if logged in user is the owner
@@ -66,7 +66,10 @@ const UpdateBlog = () => {
         ...formData,
       };
 
-      await axios.put(`http://localhost:3000/blog/${id}`, updatedBlog);
+      await axios.put(
+        `https://idea-canvas-server.vercel.app/blog/${id}`,
+        updatedBlog
+      );
 
       toast.success("Blog updated successfully!");
       navigate(`/blog/${id}`); // Redirect to blog detail page
