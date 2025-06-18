@@ -1,9 +1,11 @@
 // AddBlog.jsx
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const AddBlog = () => {
+  const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: "",
     image: "",
@@ -22,8 +24,17 @@ const AddBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await axios.post("http://localhost:3000/addBlog", formData);
+      const blogData = {
+        ...formData,
+        email: user?.email,
+        authorName: user?.displayName || "Anonymous",
+        authorPhoto:
+          user?.photoURL || "https://source.unsplash.com/100x100/?portrait",
+      };
+
+      await axios.post("http://localhost:3000/addBlog", blogData);
       toast.success("Blog added successfully!");
       setFormData({
         title: "",

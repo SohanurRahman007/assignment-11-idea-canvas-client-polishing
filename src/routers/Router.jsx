@@ -7,6 +7,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import PrivetRoute from "./PrivetRoute";
 import AddBlog from "../pages/AddBlog/AddBlog";
 import WishlistPage from "../pages/WishlistPage/WishlistPage";
+import BlogDetailsPage from "../pages/BlogDetailsPag/BlogDetailsPag";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             <AddBlog></AddBlog>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "/blog/:id",
+        Component: BlogDetailsPage,
       },
       {
         path: "/wishlist",
