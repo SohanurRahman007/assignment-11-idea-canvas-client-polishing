@@ -70,7 +70,7 @@ const WishlistPage = () => {
             </Link>
             <button
               onClick={() => handleRemove(info.row.original._id)}
-              className="px-3 py-1 border border-orange-500 text-orange-500 rounded hover:bg-orange-100"
+              className="px-3 py-1 border border-orange-500 hover:bg-red-500 hover:text-white text-orange-500 rounded cursor-pointer"
             >
               Remove
             </button>

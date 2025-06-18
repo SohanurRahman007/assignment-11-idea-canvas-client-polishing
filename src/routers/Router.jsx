@@ -8,6 +8,7 @@ import PrivetRoute from "./PrivetRoute";
 import AddBlog from "../pages/AddBlog/AddBlog";
 import WishlistPage from "../pages/WishlistPage/WishlistPage";
 import BlogDetailsPage from "../pages/BlogDetailsPag/BlogDetailsPag";
+import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: "/blog/:id",
         Component: BlogDetailsPage,
+      },
+      {
+        path: "/update-blog/:id",
+        element: (
+          <PrivetRoute>
+            <UpdateBlog />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/wishlist",
