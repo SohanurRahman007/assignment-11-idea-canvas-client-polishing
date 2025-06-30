@@ -6,7 +6,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const AddBlog = () => {
   const { user } = useContext(AuthContext);
-  console.log(user.accessToken);
+  // console.log(user.accessToken);
   const [formData, setFormData] = useState({
     title: "",
     image: "",
@@ -35,10 +35,7 @@ const AddBlog = () => {
           user?.photoURL || "https://source.unsplash.com/100x100/?portrait",
       };
 
-      await axios.post(
-        "https://idea-canvas-server.vercel.app/addBlog",
-        blogData
-      );
+      await axios.post("http://localhost:3000/addBlog", blogData);
       toast.success("Blog added successfully!");
       setFormData({
         title: "",

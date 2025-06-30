@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_apiKey,
-  authDomain: import.meta.env.VITE_authDomain,
-  projectId: import.meta.env.VITE_projectId,
-  storageBucket: import.meta.env.VITE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_messagingSenderId,
-  appId: import.meta.env.VITE_appId,
+  apiKey: "AIzaSyDbNZ-E7S_NnlYcG8RwI4DDohDWb9tIQaI",
+  authDomain: "idea-canvas-88aaf.firebaseapp.com",
+  projectId: "idea-canvas-88aaf",
+  storageBucket: "idea-canvas-88aaf.firebasestorage.app",
+  messagingSenderId: "965913278832",
+  appId: "1:965913278832:web:be9ab681c431c3a4e3b7b5",
 };
 
 // Initialize Firebase

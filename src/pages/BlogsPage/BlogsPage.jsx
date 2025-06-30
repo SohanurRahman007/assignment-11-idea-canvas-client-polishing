@@ -19,10 +19,7 @@ const BlogsPage = () => {
       if (category !== "All") params.category = category;
       if (search.trim()) params.search = search.trim();
 
-      const res = await axios.get(
-        "https://idea-canvas-server.vercel.app/blogs",
-        { params }
-      );
+      const res = await axios.get("http://localhost:3000/blogs", { params });
       setBlogs(res.data);
     } catch (error) {
       console.error("Failed to fetch blogs:", error);
@@ -41,7 +38,7 @@ const BlogsPage = () => {
     }
 
     try {
-      await axios.post("https://idea-canvas-server.vercel.app/wishlist", {
+      await axios.post("http://localhost:3000/wishlist", {
         blogId,
         userEmail,
       });

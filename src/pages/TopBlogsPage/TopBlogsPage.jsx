@@ -7,7 +7,7 @@ const TopBlogsPage = () => {
   const [topBlogs, setTopBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("https://idea-canvas-server.vercel.app/blogs/top")
+    fetch("http://localhost:3000/blogs/top")
       .then((res) => res.json())
       .then((data) => setTopBlogs(data));
   }, []);

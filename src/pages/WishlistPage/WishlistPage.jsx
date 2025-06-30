@@ -24,9 +24,7 @@ const WishlistPage = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(
-          `https://idea-canvas-server.vercel.app/wishlist?email=${user.email}`
-        )
+        .get(`http://localhost:3000/wishlist?email=${user.email}`)
         .then((res) => setWishlist(res.data))
         .catch((err) => {
           console.log(err);
@@ -37,9 +35,7 @@ const WishlistPage = () => {
 
   const handleRemove = useCallback(async (id) => {
     try {
-      await axios.delete(
-        `https://idea-canvas-server.vercel.app/wishlist/${id}`
-      );
+      await axios.delete(`http://localhost:3000/wishlist/${id}`);
       toast.success("Removed from wishlist");
       setWishlist((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
