@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../../assets/logo/logo.png";
+import { Link } from "react-router";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white dark:bg-gray-900 shadow-sm rounded-md">
+      <footer className="bg-white dark:bg-gray-900 mb-6 shadow-sm rounded-md">
         <div className="container px-6 py-8 mx-auto">
           <div className="flex flex-col items-center text-center">
             <a href="#">
@@ -13,50 +14,49 @@ const Footer = () => {
               Idea <span className="text-orange-500 font-bold ">C</span>anvas
             </span>
             <div className="flex flex-wrap justify-center mt-6 -mx-4">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-orange-500 dark:text-gray-300 dark:hover:text-orange-500"
                 aria-label="Reddit"
               >
                 {" "}
                 Home{" "}
-              </a>
+              </Link>
 
-              <a
-                href="#"
+              <Link
+                to="/aboutEvent"
                 className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-orange-500 dark:text-gray-300 dark:hover:text-orange-500"
                 aria-label="Reddit"
               >
-                {" "}
-                About{" "}
-              </a>
+                About
+              </Link>
 
-              <a
-                href="#"
+              <Link
+                to="/teams"
                 className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-orange-500 dark:text-gray-300 dark:hover:text-orange-500"
                 aria-label="Reddit"
               >
                 {" "}
                 Teams{" "}
-              </a>
+              </Link>
 
-              <a
-                href="#"
+              <Link
+                to="/privacy"
                 className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-orange-500 dark:text-gray-300 dark:hover:text-orange-500"
                 aria-label="Reddit"
               >
                 {" "}
                 Privacy{" "}
-              </a>
+              </Link>
 
-              <a
-                href="#"
+              <Link
+                to="/cookies"
                 className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-orange-500 dark:text-gray-300 dark:hover:text-orange-500"
                 aria-label="Reddit"
               >
                 {" "}
                 Cookies{" "}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -64,7 +64,7 @@ const Footer = () => {
 
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
             <p className="text-sm text-gray-500 dark:text-gray-300">
-              © Copyright 2021. All Rights Reserved.
+              © Copyright 2021.IdeaCanvas All Rights Reserved.
             </p>
 
             <div className="flex -mx-2">

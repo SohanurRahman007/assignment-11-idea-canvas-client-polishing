@@ -11,6 +11,10 @@ import BlogDetailsPage from "../pages/BlogDetailsPag/BlogDetailsPag";
 import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
 import BlogsPage from "../pages/BlogsPage/BlogsPage";
 import TopBlogsPage from "../pages/TopBlogsPage/TopBlogsPage";
+import AboutEvent from "../components/Footer/AboutEvent";
+import Teams from "../components/Footer/Teams";
+import PrivacyPolicy from "../components/Footer/PrivacyPolicy";
+import CookiesPolicy from "../components/Footer/CookiesPolicy";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +69,22 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "aboutEvent",
+        Component: AboutEvent,
+      },
+      {
+        path: "teams",
+        Component: Teams,
+      },
+      {
+        path: "privacy",
+        Component: PrivacyPolicy,
+      },
+      {
+        path: "cookies",
+        Component: CookiesPolicy,
       },
     ],
   },
