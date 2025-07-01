@@ -90,8 +90,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-base-100 sticky top-0 z-50 shadow-md w-full">
+      {/* ===== Navbar Main ===== */}
+      <nav className="bg-base-100 sticky top-0 z-50 shadow-sm w-full">
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-sm" />
             <span className="text-xl font-bold text-base-content">
@@ -99,12 +101,12 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation */}
           <ul className="hidden md:flex gap-6 text-base-content">{navItems}</ul>
 
           {/* Right Side (Desktop) */}
           <div className="hidden md:flex items-center gap-4">
-            <button onClick={toggleTheme} className="text-xl">
+            <button onClick={toggleTheme} className="text-xl cursor-pointer">
               {theme === "light" ? "🌙" : "☀️"}
             </button>
 
@@ -143,7 +145,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Hamburger */}
           <button
             onClick={() => setIsOpen(true)}
             className="md:hidden text-2xl"
@@ -153,12 +155,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Drawer with outside click & transparent overlay */}
+      {/* ===== Mobile Drawer ===== */}
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-50 md:hidden"
-          onClose={setIsOpen}
+          onClose={() => setIsOpen(false)}
         >
           <Transition.Child
             as={Fragment}
@@ -170,12 +172,13 @@ const Navbar = () => {
             leaveTo="opacity-0 translate-x-full"
           >
             <div className="fixed inset-0 flex z-50">
-              {/* Transparent overlay to close on click */}
-              <Dialog.Overlay
+              {/* ✅ Replaced Dialog.Overlay with div */}
+              <div
                 className="fixed inset-0 bg-black/40"
                 onClick={() => setIsOpen(false)}
-              />
-              {/* Drawer content */}
+              ></div>
+
+              {/* Drawer Panel */}
               <div className="relative bg-base-100 w-64 p-6 shadow-lg z-50">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-semibold">Menu</h2>

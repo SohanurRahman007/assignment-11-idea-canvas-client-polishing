@@ -2,12 +2,12 @@ import React from "react";
 
 const CookiesPolicy = () => {
   return (
-    <section className="bg-white dark:bg-gray-900 mt-6 mb-6 text-gray-700 dark:text-gray-300 px-6 md:px-12 py-12  mx-auto rounded-md shadow-sm">
-      <div className="text-center mb-10">
+    <section className="mt-6 text-base-content mb-6 md:rounded-sm bg-base-100 py-16">
+      <div className=" text-base-content mb-10">
         <h2 className="text-3xl font-bold text-orange-500 mb-3">
           Cookies Policy
         </h2>
-        <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+        <p className="max-w-2xl  text-base-content">
           This Cookies Policy explains how IdeaCanvas uses cookies and similar
           technologies when you use our website.
         </p>
@@ -15,7 +15,7 @@ const CookiesPolicy = () => {
 
       <div className="space-y-6 text-sm leading-relaxed">
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             1. What Are Cookies?
           </h3>
           <p>
@@ -26,7 +26,7 @@ const CookiesPolicy = () => {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             2. Types of Cookies We Use
           </h3>
           <ul className="list-disc list-inside space-y-1">
@@ -50,7 +50,7 @@ const CookiesPolicy = () => {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             3. How to Control Cookies
           </h3>
           <p>
@@ -60,7 +60,7 @@ const CookiesPolicy = () => {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             4. Third-Party Cookies
           </h3>
           <p>
@@ -70,7 +70,7 @@ const CookiesPolicy = () => {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             5. Updates to This Policy
           </h3>
           <p>
@@ -80,7 +80,7 @@ const CookiesPolicy = () => {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             6. Contact Us
           </h3>
           <p>

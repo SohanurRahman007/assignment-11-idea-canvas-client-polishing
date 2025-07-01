@@ -26,12 +26,12 @@ const teamMembers = [
 
 const Teams = () => {
   return (
-    <section className="bg-gray-50 mt-6 mb-6 rounded-sm dark:bg-gray-900 py-16 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto text-center mb-12">
+    <section className="mt-6 text-base-content mb-6 md:rounded-sm bg-base-100 py-16">
+      <div className=" mx-auto text-center mb-12">
         <h2 className="text-3xl font-bold text-orange-500 mb-4">
           Meet Our Team
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+        <p className="text-base-content max-w-xl mx-auto">
           Our team is composed of passionate professionals dedicated to bringing
           your ideas to life with precision and creativity.
         </p>
@@ -44,7 +44,7 @@ const Teams = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-md p-6 text-center"
+            className="bg-base-100 rounded-sm shadow hover:shadow-md p-6 text-center"
           >
             <img
               src={member.image}

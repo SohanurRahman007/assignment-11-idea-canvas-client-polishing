@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -57,7 +59,7 @@ const Login = () => {
           <h2 className="mb-3 text-3xl font-semibold text-center text-orange-500">
             Login Now
           </h2>
-          <p className="text-sm text-center dark:text-gray-600">
+          <p className="text-sm text-center text-base-content">
             Dont have account?
             <Link
               to="/register"
@@ -86,17 +88,21 @@ const Login = () => {
             </button>
           </div>
           <div className="flex items-center w-full my-4">
-            <hr className="w-full dark:text-gray-600" />
-            <p className="px-3 dark:text-gray-600">OR</p>
-            <hr className="w-full dark:text-gray-600" />
+            <hr className="w-full text-base-content border-orange-500" />
+            <p className="px-3 text-base-content ">OR</p>
+            <hr className="w-full border-orange-500 text-base-content" />
           </div>
           <form
             onSubmit={handleLogin}
-            className="space-y-8 p-4 transition-all  rounded-lg bg-white shadow"
+            className="space-y-8 p-4 transition-all bg-base-100 rounded-sm shadow"
           >
-            <div className="space-y-4">
+            <div className="space-y-4 bg-base-100 text-base-content">
+              {/* Email Field */}
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm">
+                <label
+                  htmlFor="email"
+                  className="block text-sm text-base-content"
+                >
                   Email address
                 </label>
                 <input
@@ -104,35 +110,50 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="leroy@jenkins.com"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+                  className="w-full px-3 py-2  border-2 border-gray-300 focus:outline-none focus:border-orange-500 rounded-sm bg-base-100"
+                  required
                 />
               </div>
-              <div className="space-y-2">
+
+              {/* Password Field with Toggle */}
+              <div className="space-y-2 relative">
                 <div className="flex justify-between">
                   <label htmlFor="password" className="text-sm">
                     Password
                   </label>
                   <a
-                    rel="noopener noreferrer"
                     href="#"
-                    className="text-xs hover:underline dark:text-gray-600"
+                    className="text-xs hover:underline text-base-content"
                   >
                     Forgot password?
                   </a>
                 </div>
+
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   id="password"
                   placeholder="*****"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+                  className="w-full px-3 py-2 rounded-sm text-base-content pr-10  border-2 border-gray-300 focus:outline-none focus:border-orange-500"
+                  required
                 />
+
+                {/* Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[2.4rem] text-base-content focus:outline-none"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
               </div>
             </div>
+
+            {/* Submit Button */}
             <input
               type="submit"
               value="Login Now"
-              className="w-full px-8 btn py-3 font-semibold rounded-md dark:bg-orange-500 dark:text-gray-50 border-none"
+              className="w-full px-8 btn py-3 font-semibold rounded-sm bg-orange-500 text-white "
             />
           </form>
         </div>
