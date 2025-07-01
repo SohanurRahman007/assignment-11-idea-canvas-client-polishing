@@ -4,16 +4,6 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../Loading/Loading";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-  Chip,
-} from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ArticleIcon from "@mui/icons-material/Article";
 import { motion } from "framer-motion";
 
 const RecentBlogs = () => {
@@ -57,10 +47,10 @@ const RecentBlogs = () => {
   return (
     <section className="my-12">
       <div className="text-center mb-10">
-        <h1 className=" text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">
           Recent Blog Posts
         </h1>
-        <p className=" text-base-content mt-1.5 max-w-2xl mx-auto">
+        <p className="text-base-content mt-1.5 max-w-2xl mx-auto">
           Stay up to date with the latest articles, tutorials, and stories from
           our amazing community.
         </p>
@@ -73,78 +63,45 @@ const RecentBlogs = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ scale: 1.02 }}
+            className="card bg-base-100 shadow-sm border border-orange-200 transition-all duration-300 hover:shadow-sm group"
           >
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                bgcolor: (theme) =>
-                  theme.palette.mode === "dark" ? "#2c2c2c" : "#fff",
-                boxShadow: 3,
-                borderRadius: 1,
-              }}
-              className="transition-transform hover:scale-[1.02] "
-            >
-              <CardMedia
-                component="img"
-                image={blog.image}
+            <figure className="overflow-hidden rounded-t-md">
+              <img
+                src={blog.image}
                 alt={blog.title}
-                height="180"
-                sx={{ objectFit: "cover" }}
+                className="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-105"
               />
-              <CardContent className="flex flex-col flex-grow justify-between">
-                <div className="flex flex-col gap-2">
-                  <Chip label={blog.category} color="warning" size="small" />
-                  <Typography variant="h6" component="h2" color="text.primary">
-                    {blog.title.length > 45
-                      ? blog.title.slice(0, 45) + "..."
-                      : blog.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {blog.shortDescription?.slice(0, 80)}...
-                  </Typography>
-                </div>
+            </figure>
 
-                <div className="flex gap-2 mt-4">
-                  <Button
-                    variant="contained"
-                    size="small"
-                    fullWidth
-                    startIcon={<ArticleIcon />}
-                    component={Link}
-                    to={`/blog/${blog._id}`}
-                    sx={{
-                      bgcolor: "#f97316", // orange-500
-                      color: "#fff",
-                      "&:hover": { bgcolor: "#ea580c" }, // orange-600
-                      fontWeight: "600",
-                    }}
-                  >
-                    Details
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    startIcon={<FavoriteBorderIcon />}
-                    onClick={() => handleWishlist(blog)}
-                    sx={{
-                      borderColor: "#f97316", // orange-500
-                      color: "#f97316",
-                      "&:hover": {
-                        bgcolor: "#fff7ed", // very light orange
-                        color: "#ea580c", // orange-600
-                        borderColor: "#ea580c",
-                      },
-                      fontWeight: "600",
-                    }}
-                  >
-                    Wishlist
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="card-body flex flex-col justify-between">
+              <div>
+                {/* <div className="badge bg-orange-500 mb-2">{blog.category}</div> */}
+                <h2 className="card-title text-orange-500">
+                  {blog.title.length > 45
+                    ? blog.title.slice(0, 45) + "..."
+                    : blog.title}
+                </h2>
+                <p className="text-sm text-base-content mt-1">
+                  {blog.shortDescription?.slice(0, 80)}...
+                </p>
+              </div>
+
+              <div className="card-actions mt-4 grid grid-cols-2 gap-2">
+                <Link
+                  to={`/blog/${blog._id}`}
+                  className="btn btn-sm bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+                >
+                  Details
+                </Link>
+                <button
+                  onClick={() => handleWishlist(blog)}
+                  className="btn btn-sm border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold"
+                >
+                  Wishlist
+                </button>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>

@@ -142,7 +142,7 @@ const BlogsPage = () => {
 
             <div className="flex flex-col justify-between p-5 flex-grow">
               <div>
-                <h2 className="text-xl font-bold text-orange-600 dark:text-orange-400 mb-1">
+                <h2 className="text-xl font-bold text-orange-500 dark:text-orange-500 mb-1">
                   {blog.title}
                 </h2>
                 <p className="text-sm text-base-content mb-2">

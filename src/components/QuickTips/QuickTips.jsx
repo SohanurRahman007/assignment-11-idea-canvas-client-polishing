@@ -13,13 +13,13 @@ const tips = [
 const QuickTips = () => {
   return (
     <motion.section
-      className="py-2 shadow-sm rounded-sm"
+      className="py-2 mt-14"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: false, amount: 0.4 }}
     >
-      <div className=" mx-auto ">
+      <div className=" mx-auto mb-8">
         <h2 className="text-2xl text-center mb-6 md:text-3xl lg:text-4xl font-bold text-orange-500">
           Quick Tips for You
         </h2>
@@ -27,13 +27,13 @@ const QuickTips = () => {
           {tips.map((tip, index) => (
             <motion.div
               key={index}
-              className="bg-gray-50 border-l-4 border-orange-500 p-4 shadow-sm rounded-md"
+              className="bg-base-100 border-l-4 border-orange-500 p-4 shadow-sm rounded-sm"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.4 }}
               viewport={{ once: true }}
             >
-              <p className="text-gray-800">{tip}</p>
+              <p className="text-base-content">{tip}</p>
             </motion.div>
           ))}
         </div>

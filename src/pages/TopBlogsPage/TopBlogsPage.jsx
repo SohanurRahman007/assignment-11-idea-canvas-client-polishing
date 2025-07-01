@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../../components/Loading/Loading";
+import { FaRegStar } from "react-icons/fa";
 
 const TopBlogsPage = () => {
   const { loading } = useContext(AuthContext);
@@ -12,38 +13,57 @@ const TopBlogsPage = () => {
       .then((data) => setTopBlogs(data));
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
-        Top 10 Blog Posts by Content
-      </h2>
+    <div className=" mx-auto  py-10">
+      {/* Title Section */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-orange-500 flex justify-center items-center gap-2">
+          <FaRegStar className="text-orange-400" />
+          Top 10 Blogs by Word Count
+        </h2>
+        <p className="text-base-content mt-2 max-w-2xl mx-auto">
+          Here are the longest and most detailed blog posts in our
+          platform—created with passion and depth by our community.
+        </p>
+      </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-300 shadow-sm rounded-md">
-          <thead className="bg-orange-100 text-gray-700">
+      {/* Table Section */}
+      <div className="overflow-x-auto  border border-orange-50 rounded-sm shadow-sm bg-base-100">
+        <table className="min-w-full text-sm text-left text-base-content">
+          <thead className="bg-base-100 text-orange-500">
             <tr>
-              <th className="py-2 px-4 text-left">#</th>
-              <th className="py-2 px-4 text-left">Title</th>
-              <th className="py-2 px-4 text-left">Category</th>
-              <th className="py-2 px-4 text-left">Author Email</th>
-              <th className="py-2 px-4 text-left">Word Count</th>
+              <th className="py-3 px-4 font-semibold">#</th>
+              <th className="py-3 px-4 font-semibold">Title</th>
+              <th className="py-3 px-4 font-semibold">Category</th>
+              <th className="py-3 px-4 font-semibold">Author</th>
+              <th className="py-3 px-4 font-semibold">Word Count</th>
             </tr>
           </thead>
           <tbody>
             {topBlogs.map((blog, index) => (
               <tr
                 key={blog._id}
-                className="border-t border-gray-300 hover:bg-gray-50"
+                className="border-t border-orange-100 hover:bg-orange-300 transition-colors "
               >
-                <td className="py-2 px-4">{index + 1}</td>
-                <td className="py-2 px-4">{blog.title}</td>
-                <td className="py-2 px-4">{blog.category}</td>
-                <td className="py-2 px-4">{blog.userEmail || "N/A"}</td>
-                <td className="py-2 px-4">{blog.wordCount}</td>
+                <td className="py-2 px-4 font-medium text-orange-500 ">
+                  {index + 1}
+                </td>
+                <td className="py-2 px-4 hover:text-base-content">
+                  {blog.title}
+                </td>
+                <td className="py-2 px-4 ">
+                  <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs text-base-content">
+                    {blog.category}
+                  </span>
+                </td>
+                <td className="py-2 px-4 text-base-content">
+                  {blog.userEmail || "N/A"}
+                </td>
+                <td className="py-2 px-4 font-semibold text-base-content">
+                  {blog.wordCount}
+                </td>
               </tr>
             ))}
           </tbody>

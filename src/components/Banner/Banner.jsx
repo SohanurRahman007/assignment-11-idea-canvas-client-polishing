@@ -7,17 +7,17 @@ import "swiper/css/effect-fade";
 
 const slides = [
   {
-    img: "https://i.ibb.co/chXPT3NT/banner-6-Copy.jpg",
+    img: "https://i.ibb.co/bFdk4ft/tatiana-zanon-VP2mjt-Jq-Wv-Y-unsplash.jpg",
     heading: "Unleash Your Creativity",
     desc: "Write, share, and inspire with your unique stories. Join a community passionate about ideas.",
   },
   {
-    img: "https://i.ibb.co/fzD3Jyx0/banner-5-Copy.jpg",
+    img: "https://i.ibb.co/JyShKKr/fareed-akhyear-chowdhury-x-Rl-ZUxp-Mp-Y4-unsplash.jpg",
     heading: "Discover New Voices",
     desc: "Explore diverse perspectives from bloggers around the globe and find your next read.",
   },
   {
-    img: "https://i.ibb.co/VprcD2Lj/banner-2.jpg",
+    img: "https://i.ibb.co/tXV8Sf3/sumit-chinchane-j-WKk-0-ZBUyg-unsplash.jpg",
     heading: "Connect & Grow",
     desc: "Engage with readers and grow your influence through meaningful conversations.",
   },
