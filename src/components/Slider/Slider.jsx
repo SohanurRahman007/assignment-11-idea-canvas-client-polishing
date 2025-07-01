@@ -1,78 +1,91 @@
 import React from "react";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-import "./Slider.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Pagination, Autoplay } from "swiper/modules";
 
-const carousel = (slider) => {
-  const z = 300;
-  function rotate() {
-    const deg = 360 * slider.track.details.progress;
-    slider.container.style.transform = `translateZ(-${z}px) rotateY(${-deg}deg)`;
-  }
-  slider.on("created", () => {
-    const deg = 360 / slider.slides.length;
-    slider.slides.forEach((element, idx) => {
-      element.style.transform = `rotateY(${deg * idx}deg) translateZ(${z}px)`;
-    });
-    rotate();
-  });
-  slider.on("detailsChanged", rotate);
-};
+import "swiper/css";
+import "swiper/css/pagination";
 
-const Slider = () => {
-  const [sliderRef] = useKeenSlider(
-    {
-      loop: true,
-      selector: ".carousel__cell",
-      renderMode: "custom",
-      mode: "free-snap",
-    },
-    [carousel]
-  );
+const slides = [
+  {
+    src: "https://i.ibb.co/m5zFghjR/slider-6.jpg",
+    title: "Personal Growth Journeys",
+    description:
+      "Explore inspiring stories of transformation and self-discovery.",
+  },
+  {
+    src: "https://i.ibb.co/Kc3C8B0t/slider-4.jpg",
+    title: "Tech Tutorials",
+    description: "Learn cutting-edge skills with expert-led tech tutorials.",
+  },
+  {
+    src: "https://i.ibb.co/SDRxBQnv/slider-5.jpg",
+    title: "Community Insights",
+    description: "Dive into the latest trends and insights from our community.",
+  },
+  {
+    src: "https://i.ibb.co/7td6qc9M/slider-3.jpg",
+    title: "Creative Ideas",
+    description: "Discover innovative ideas to boost your creativity daily.",
+  },
+  {
+    src: "https://i.ibb.co/BHnjp7dD/slider-2.jpg",
+    title: "Expert Opinions",
+    description: "Get inspired by thought leaders and industry experts.",
+  },
+];
+
+const SliderSection = () => {
   return (
-    <>
-      <div>
-        <h2 className="text-3xl font-bold text-center mb-3 mt-4 text-orange-600">
-          Discover Inspiring Stories
-        </h2>
-        <p className="text-center text-gray-600 mb-8 max-w-xl mx-auto">
-          From personal growth journeys to tech tutorials, explore a rotating
-          selection of powerful posts handpicked just for you. Stay inspired,
-          stay informed.
-        </p>
-      </div>
-      <div className="wrapper shadow-sm rounded-md">
-        <div className="scene">
-          <div className="carousel keen-slider" ref={sliderRef}>
-            <div className="carousel__cell number-slide1 ">
-              <img src="https://i.ibb.co/m5zFghjR/slider-6.jpg" alt="" />
-            </div>
-            <div className="carousel__cell number-slide2">
-              <img src="https://i.ibb.co/Kc3C8B0t/slider-4.jpg" alt="" />
-            </div>
-            <div className="carousel__cell number-slide3">
-              <img src="https://i.ibb.co/SDRxBQnv/slider-5.jpg" alt="" />
-            </div>
-            <div className="carousel__cell number-slide4">
-              <img src="https://i.ibb.co/7td6qc9M/slider-3.jpg" alt="" />
-            </div>
-            <div className="carousel__cell number-slide5">
-              <img src="https://i.ibb.co/BHnjp7dD/slider-2.jpg" alt="" />
-            </div>
-            <div className="carousel__cell number-slide6">
-              <img src=" https://i.ibb.co/7dSrBnnN/slider-1.jpg" alt="" />
-            </div>
-          </div>
+    <section className="mt-16 shadow-sm shadow-orange-300 mb-10 ">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10">
+        {/* Text Left Side (40%) */}
+        <div className="w-full md:p-4 lg:w-2/5 space-y-5 text-center lg:text-left">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">
+            Discover Inspiring Stories
+          </h2>
+          <p className="text-base-content mt-1.5 max-w-2xl mx-auto">
+            From personal growth journeys to tech tutorials, explore a curated
+            selection of powerful posts handpicked just for you. Stay inspired,
+            stay informed with fresh ideas, expert opinions, and trending topics
+            from our vibrant community.
+          </p>
+        </div>
+
+        {/* Slider Right Side (60%) */}
+        <div className="w-full lg:w-3/5">
+          <Swiper
+            direction="vertical"
+            slidesPerView={1}
+            spaceBetween={30}
+            mousewheel={true}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            modules={[Mousewheel, Pagination, Autoplay]}
+            className="h-[460px]"
+          >
+            {slides.map((slide, i) => (
+              <SwiperSlide key={i}>
+                <div className="relative w-full h-[420px] rounded-sm overflow-hidden shadow-md">
+                  <img
+                    src={slide.src}
+                    alt={slide.title}
+                    className="w-full h-full object-cover brightness-90"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
+                    <h3 className="text-2xl font-bold text-white mb-1">
+                      {slide.title}
+                    </h3>
+                    <p className="text-white/90">{slide.description}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
-export default Slider;
-
-//
-//
-//
-//
-//
+export default SliderSection;

@@ -4,6 +4,7 @@ import Banner from "../../components/Banner/Banner";
 import QuickTips from "../../components/QuickTips/QuickTips";
 import RecentBlogs from "../../components/RecentBlogs/RecentBlogs";
 import Newsletter from "../../components/Newsletter/Newsletter";
+import WhatYoullGet from "../../components/WhatYoullGet/WhatYoullGet";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <RecentBlogs></RecentBlogs>
       <Slider></Slider>
       <QuickTips></QuickTips>
+      <WhatYoullGet></WhatYoullGet>
       <Newsletter></Newsletter>
     </div>
   );

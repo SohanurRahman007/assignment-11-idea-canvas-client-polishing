@@ -1,79 +1,69 @@
 import React from "react";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-// import "./Banner.css"; // Optional
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import { motion } from "framer-motion";
+import "swiper/css";
+import "swiper/css/effect-fade";
 
-const animation = { duration: 20000, easing: (t) => t };
+const slides = [
+  {
+    img: "https://i.ibb.co/chXPT3NT/banner-6-Copy.jpg",
+    heading: "Unleash Your Creativity",
+    desc: "Write, share, and inspire with your unique stories. Join a community passionate about ideas.",
+  },
+  {
+    img: "https://i.ibb.co/fzD3Jyx0/banner-5-Copy.jpg",
+    heading: "Discover New Voices",
+    desc: "Explore diverse perspectives from bloggers around the globe and find your next read.",
+  },
+  {
+    img: "https://i.ibb.co/VprcD2Lj/banner-2.jpg",
+    heading: "Connect & Grow",
+    desc: "Engage with readers and grow your influence through meaningful conversations.",
+  },
+];
 
 const Banner = () => {
-  const [sliderRef] = useKeenSlider({
-    loop: true,
-    renderMode: "performance",
-    drag: false,
-    created(s) {
-      s.moveToIdx(5, true, animation);
-    },
-    updated(s) {
-      s.moveToIdx(s.track.details.abs + 5, true, animation);
-    },
-    animationEnded(s) {
-      s.moveToIdx(s.track.details.abs + 5, true, animation);
-    },
-  });
   return (
-    <>
-      <h2 className="text-3xl font-bold text-center mb-3 mt-4 text-orange-600">
-        Welcome to Our Blog World
-      </h2>
-      <p className="text-center text-gray-600 mb-8 max-w-xl mx-auto">
-        Explore trending topics, expert opinions, and engaging stories curated
-        just for you.
-      </p>
-      <div ref={sliderRef} className="keen-slider shadow-sm rounded-md">
-        <div className="keen-slider__slide number-slide1 ">
-          <img
-            src="https://i.ibb.co/chXPT3NT/banner-6-Copy.jpg"
-            className="w-full object-cover"
-            alt=""
-          />
-        </div>
-        <div className="keen-slider__slide number-slide2 ">
-          <img
-            src="https://i.ibb.co/fzD3Jyx0/banner-5-Copy.jpg"
-            className="w-full object-cover"
-            alt=""
-          />
-        </div>
-        <div className="keen-slider__slide number-slide3 ">
-          <img
-            src="https://i.ibb.co/67ZVP36K/banner-4-Copy.jpg"
-            className="w-full object-cover"
-            alt=""
-          />
-        </div>
-        <div className="keen-slider__slide number-slide4 ">
-          <img
-            src="https://i.ibb.co/BVqtvvRn/banner-3.jpg"
-            className="w-full "
-            alt=""
-          />
-        </div>
-        <div className="keen-slider__slide number-slide5 ">
-          <img
-            src="https://i.ibb.co/VprcD2Lj/banner-2.jpg"
-            className="w-full object-cover"
-            alt=""
-          />
-        </div>
-        <div className="keen-slider__slide number-slide6 ">
-          <img
-            src="https://i.ibb.co/5gNLhWph/banner-1.jpg"
-            className="w-full object-cover"
-            alt=""
-          />
-        </div>
-      </div>
-    </>
+    <section className="w-full relative">
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        loop
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
+        className="w-full h-[70vh] md:h-[80vh] rounded-sm overflow-hidden"
+      >
+        {slides.map((slide, idx) => (
+          <SwiperSlide key={idx}>
+            <div className="w-full h-full relative">
+              <img
+                src={slide.img}
+                alt={`Slide ${idx + 1}`}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60 flex items-center justify-start px-6 md:px-20">
+                <motion.div
+                  initial={{ opacity: 0, x: -60 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.9 }}
+                  className="max-w-xl text-white"
+                >
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-orange-400">
+                    {slide.heading}
+                  </h2>
+                  <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6">
+                    {slide.desc}
+                  </p>
+                  <button className="bg-orange-400 hover:bg-orange-500 transition-colors duration-300 text-white font-semibold px-6 py-3 rounded shadow-lg">
+                    Explore Blogs
+                  </button>
+                </motion.div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
   );
 };
 

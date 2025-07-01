@@ -13,14 +13,14 @@ const tips = [
 const QuickTips = () => {
   return (
     <motion.section
-      className="py-12 shadow-sm rounded-md"
+      className="py-2 shadow-sm rounded-sm"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: false, amount: 0.4 }}
     >
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-3 mt-4 text-orange-600">
+      <div className=" mx-auto ">
+        <h2 className="text-2xl text-center mb-6 md:text-3xl lg:text-4xl font-bold text-orange-500">
           Quick Tips for You
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
