@@ -56,6 +56,9 @@ const BlogsPage = () => {
     try {
       const res = await axios.post("http://localhost:3000/wishlist", {
         blogId: blog._id,
+        title: blog.title,
+        image: blog.image,
+        category: blog.category,
         userEmail: user.email,
       });
 

@@ -58,10 +58,10 @@ const AddBlog = () => {
       >
         <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-lg transition-colors">
           <div className="space-y-2 col-span-full lg:col-span-1">
-            <h2 className="font-medium text-3xl text-orange-600">
+            <h2 className="font-medium text-3xl text-orange-500">
               Add a New Blog
             </h2>
-            <p className="text-md text-gray-600">
+            <p className="text-md text-base-content">
               Fill out the blog information to share your thoughts with the
               world.
             </p>
@@ -81,11 +81,27 @@ const AddBlog = () => {
                 className="w-full rounded-md p-2 border border-gray-400"
                 required
               >
-                <option value="">Select Category</option>
-                <option value="Tech">Tech</option>
-                <option value="Life">Life</option>
-                <option value="Education">Education</option>
-                <option value="Business">Business</option>
+                <option className="text-base-content bg-base-100" value="">
+                  Select Category
+                </option>
+                <option className="text-base-content bg-base-100" value="Tech">
+                  Tech
+                </option>
+                <option className="text-base-content bg-base-100" value="Life">
+                  Life
+                </option>
+                <option
+                  className="text-base-content bg-base-100"
+                  value="Education"
+                >
+                  Education
+                </option>
+                <option
+                  className="text-base-content bg-base-100"
+                  value="Business"
+                >
+                  Business
+                </option>
               </select>
             </div>
 
@@ -160,7 +176,7 @@ const AddBlog = () => {
             <div className="col-span-full">
               <button
                 type="submit"
-                className="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700 transition cursor-pointer"
+                className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-700 transition cursor-pointer"
               >
                 Submit Blog
               </button>
