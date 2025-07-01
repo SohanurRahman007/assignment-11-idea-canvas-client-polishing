@@ -1,4 +1,3 @@
-// UpdateBlog.jsx
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,15 +20,13 @@ const UpdateBlog = () => {
   const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
-    // Fetch blog data by id to prefill form
     axios
       .get(`http://localhost:3000/blog/${id}`)
       .then((res) => {
         const blog = res.data;
-        // Check if logged in user is the owner
         if (user?.email !== blog.email) {
           toast.error("You are not authorized to edit this blog");
-          navigate("/"); // Redirect away
+          navigate("/");
           return;
         }
         setIsOwner(true);
@@ -44,7 +41,6 @@ const UpdateBlog = () => {
       })
       .catch((err) => {
         toast.error("Failed to load blog");
-        console.log(err);
         navigate("/");
       });
   }, [id, user, navigate]);
@@ -59,143 +55,123 @@ const UpdateBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Send update request to server
-      const updatedBlog = {
-        ...formData,
-      };
-
-      await axios.put(`http://localhost:3000/blog/${id}`, updatedBlog);
-
+      await axios.put(`http://localhost:3000/blog/${id}`, formData);
       toast.success("Blog updated successfully!");
-      navigate(`/blog/${id}`); // Redirect to blog detail page
+      navigate(`/blog/${id}`);
     } catch (err) {
       toast.error("Failed to update blog");
-      console.error(err);
     }
   };
 
   if (loading) return <p className="text-center py-10">Loading...</p>;
-
-  if (!isOwner) return null; // Render nothing if not owner
+  if (!isOwner) return null;
 
   return (
-    <section className="mt-5 mb-5">
-      <form
-        onSubmit={handleSubmit}
-        className="container flex flex-col mx-auto space-y-12"
-      >
-        <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-lg transition-colors">
-          <div className="space-y-2 col-span-full lg:col-span-1">
-            <h2 className="font-medium text-3xl text-orange-600">
-              Update Blog
-            </h2>
-            <p className="text-md text-gray-600">
-              Edit the blog details and submit to update.
-            </p>
+    <section className="max-w-5xl mx-auto p-6 bg-base-100 rounded-lg shadow-md mt-10">
+      <h2 className="text-3xl font-bold text-orange-500 mb-6">Update Blog</h2>
+      <p className="text-base-content mt-1.5 max-w-2xl mb-6">
+        Use this form to update your blog post with the latest content, image,
+        and category. Make sure your updates are accurate and well-written to
+        engage your readers.
+      </p>
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Category */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-medium">Category</span>
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="select select-bordered w-full"
+              required
+            >
+              <option disabled value="">
+                Select Category
+              </option>
+              <option value="Tech">Tech</option>
+              <option value="Life">Life</option>
+              <option value="Education">Education</option>
+              <option value="Business">Business</option>
+            </select>
           </div>
 
-          <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-            {/* Category */}
-            <div className="col-span-full">
-              <label htmlFor="category" className="text-sm font-medium">
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
-                required
-              >
-                <option value="">Select Category</option>
-                <option value="Tech">Tech</option>
-                <option value="Life">Life</option>
-                <option value="Education">Education</option>
-                <option value="Business">Business</option>
-              </select>
-            </div>
-
-            {/* Title */}
-            <div className="col-span-full sm:col-span-3">
-              <label htmlFor="title" className="text-sm font-medium">
-                Blog Title
-              </label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                placeholder="Enter blog title"
-                value={formData.title}
-                onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
-                required
-              />
-            </div>
-
-            {/* Image */}
-            <div className="col-span-full sm:col-span-3">
-              <label htmlFor="image" className="text-sm font-medium">
-                Image URL
-              </label>
-              <input
-                id="image"
-                name="image"
-                type="text"
-                placeholder="Enter image URL"
-                value={formData.image}
-                onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
-                required
-              />
-            </div>
-
-            {/* Short Description */}
-            <div className="col-span-full">
-              <label htmlFor="shortDescription" className="text-sm font-medium">
-                Short Description
-              </label>
-              <textarea
-                id="shortDescription"
-                name="shortDescription"
-                placeholder="Write a short summary..."
-                value={formData.shortDescription}
-                onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
-                required
-              ></textarea>
-            </div>
-
-            {/* Long Description */}
-            <div className="col-span-full">
-              <label htmlFor="longDescription" className="text-sm font-medium">
-                Long Description
-              </label>
-              <textarea
-                id="longDescription"
-                name="longDescription"
-                placeholder="Write your full blog content..."
-                value={formData.longDescription}
-                onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
-                rows="6"
-                required
-              ></textarea>
-            </div>
-
-            {/* Submit */}
-            <div className="col-span-full">
-              <button
-                type="submit"
-                className="bg-orange-500 text-white px-6 py-2 rounded  transition cursor-pointer"
-              >
-                Update Blog
-              </button>
-            </div>
+          {/* Title */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-medium">Blog Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="input input-bordered w-full"
+              placeholder="Enter blog title"
+              required
+            />
           </div>
-        </fieldset>
+
+          {/* Image */}
+          <div className="form-control col-span-full">
+            <label className="label">
+              <span className="label-text font-medium">Image URL</span>
+            </label>
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              className="input input-bordered w-full"
+              placeholder="Enter image URL"
+              required
+            />
+          </div>
+
+          {/* Short Description */}
+          <div className="form-control col-span-full">
+            <label className="label">
+              <span className="label-text font-medium">Short Description</span>
+            </label>
+            <textarea
+              name="shortDescription"
+              value={formData.shortDescription}
+              onChange={handleChange}
+              className="textarea textarea-bordered w-full"
+              placeholder="Write a short summary..."
+              required
+            ></textarea>
+          </div>
+
+          {/* Long Description */}
+          <div className="form-control col-span-full">
+            <label className="label">
+              <span className="label-text font-medium">Long Description</span>
+            </label>
+            <textarea
+              name="longDescription"
+              value={formData.longDescription}
+              onChange={handleChange}
+              className="textarea textarea-bordered w-full"
+              placeholder="Write the full content..."
+              rows={6}
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        {/* Submit */}
+        <div className="mt-6">
+          <button
+            type="submit"
+            className="btn bg-orange-500 hover:bg-orange-600 text-white px-6"
+          >
+            Update Blog
+          </button>
+        </div>
       </form>
     </section>
   );
