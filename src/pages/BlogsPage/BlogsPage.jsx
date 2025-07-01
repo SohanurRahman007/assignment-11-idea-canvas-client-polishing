@@ -73,35 +73,55 @@ const BlogsPage = () => {
 
   return (
     <section className=" mx-auto py-10">
-      <h1 className="text-2xl text-center md:text-3xl lg:text-4xl font-bold text-orange-500">
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 text-center mb-2">
         Explore Insightful Blog Posts
       </h1>
-      <p className="text-base-content mt-1.5 max-w-2xl mx-auto text-center mb-8">
+      <p className="text-base-content mt-2 max-w-2xl mx-auto text-center mb-8">
         Dive into a curated selection of blogs on tech, lifestyle, education,
         and business. Stay informed, inspired, and up-to-date with the latest
         ideas and stories from our growing community.
       </p>
       {/* Filter and Search */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="border border-orange-400 px-4 py-2 rounded-sm shadow-sm text-gray-700 dark:text-white bg-white dark:bg-gray-800"
-        >
-          {categories.map((cat) => (
-            <option key={cat} value={cat === "All" ? "" : cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-col md:flex-row justify-end items-center mb-10 gap-6 ">
+        {/* Category Filter */}
+        <div className="w-full md:w-1/3">
+          <label
+            htmlFor="category"
+            className="block mb-1 text-base font-medium text-base-content"
+          >
+            Category
+          </label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full px-4 py-2 rounded-md border border-orange-400 shadow-sm bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-orange-400"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat === "All" ? "" : cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <input
-          type="text"
-          placeholder="Search by title..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border border-orange-400 px-4 py-2 rounded-sm shadow-sm w-full md:w-1/2 bg-white dark:bg-gray-800 text-gray-700 dark:text-white"
-        />
+        {/* Search Input */}
+        <div className="w-full md:w-2/3">
+          <label
+            htmlFor="search"
+            className="block mb-1 text-base font-medium text-base-content"
+          >
+            Search by Title
+          </label>
+          <input
+            id="search"
+            type="text"
+            placeholder="Search blog by title..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-4 py-2 rounded-md border border-orange-400 shadow-sm bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
       </div>
 
       {/* Blog Cards */}
@@ -112,7 +132,7 @@ const BlogsPage = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="rounded-sm shadow-sm bg-white dark:bg-gray-900 dark:text-white overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
+            className="bg-base-100 rounded-sm shadow-sm shadow-orange-300 flex flex-col h-full"
           >
             <img
               src={blog.image}
@@ -125,7 +145,7 @@ const BlogsPage = () => {
                 <h2 className="text-xl font-bold text-orange-600 dark:text-orange-400 mb-1">
                   {blog.title}
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                <p className="text-sm text-base-content mb-2">
                   {blog.shortDescription?.slice(0, 100)}...
                 </p>
                 <p className="text-xs text-orange-500">
@@ -133,16 +153,17 @@ const BlogsPage = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 mt-4">
+              {/* Button section anchored to bottom */}
+              <div className="grid grid-cols-2 gap-2 mt-auto pt-4">
                 <button
                   onClick={() => navigate(`/blog/${blog._id}`)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold py-2 rounded-md transition-all duration-200 cursor-pointer"
+                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold py-2 rounded-md transition-all duration-200"
                 >
                   Details
                 </button>
                 <button
                   onClick={() => handleWishlist(blog)}
-                  className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm font-semibold py-2 rounded-md transition-all duration-200 cursor-pointer"
+                  className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm font-semibold py-2 rounded-md transition-all duration-200"
                 >
                   Wishlist
                 </button>
