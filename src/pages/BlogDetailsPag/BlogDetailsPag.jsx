@@ -107,7 +107,7 @@ const BlogDetailsPage = () => {
       )}
 
       {/* Stats */}
-      <div className="flex flex-wrap items-center justify-between border-t pt-5">
+      <div className="flex flex-wrap items-center justify-between border-t border-orange-500 pt-5">
         <div className="flex gap-6 text-sm text-gray-500">
           <span>💬 {comments.length} Comments</span>
           <span>❤️ {blog.likes || 0} Likes</span>
@@ -127,7 +127,7 @@ const BlogDetailsPage = () => {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="Write your comment..."
-              className="textarea textarea-bordered w-full resize-none"
+              className="textarea textarea-bordered w-full resize-none  rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               rows={4}
             />
             <button

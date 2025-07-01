@@ -9,44 +9,44 @@ import toast from "react-hot-toast";
 const categories = ["All", "Tech", "Life", "Education", "Business"];
 
 const BlogsPage = () => {
-  const [blogs, setBlogs] = useState([]);
-  const { loading, user } = useContext(AuthContext);
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const { loading, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const fetchBlogs = async () => {
-    try {
-      const params = {};
-      if (category !== "All") params.category = category;
-      if (search.trim()) params.search = search.trim();
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const params = {};
+        if (category !== "All") params.category = category;
 
-      const res = await axios.get("http://localhost:3000/blogs", { params });
-      let data = res.data;
-
-      // Prioritize matching title first
-      if (search.trim()) {
-        data = [
-          ...data.filter((b) =>
-            b.title.toLowerCase().startsWith(search.toLowerCase())
-          ),
-          ...data.filter(
-            (b) =>
-              !b.title.toLowerCase().startsWith(search.toLowerCase()) &&
-              b.title.toLowerCase().includes(search.toLowerCase())
-          ),
-        ];
+        const res = await axios.get("http://localhost:3000/blogs", { params });
+        setAllBlogs(res.data);
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
       }
+    };
 
-      setBlogs(data);
-    } catch (error) {
-      console.error("Failed to fetch blogs:", error);
-    }
-  };
+    fetchBlogs();
+  }, [category]);
 
   useEffect(() => {
-    fetchBlogs();
-  }, [category, search]);
+    const term = search.toLowerCase();
+
+    const startsWithMatch = allBlogs.filter((b) =>
+      b.title.toLowerCase().startsWith(term)
+    );
+
+    const includesMatch = allBlogs.filter(
+      (b) =>
+        !b.title.toLowerCase().startsWith(term) &&
+        b.title.toLowerCase().includes(term)
+    );
+
+    setFilteredBlogs([...startsWithMatch, ...includesMatch]);
+  }, [search, allBlogs]);
 
   const handleWishlist = async (blog) => {
     if (!user?.email) {
@@ -75,30 +75,25 @@ const BlogsPage = () => {
   if (loading) return <Loading />;
 
   return (
-    <section className=" mx-auto py-10">
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 text-center mb-2">
+    <section className="mx-auto py-10">
+      <h1 className="text-4xl font-bold text-orange-500 text-center mb-2">
         Explore Insightful Blog Posts
       </h1>
-      <p className="text-base-content mt-2 max-w-2xl mx-auto text-center mb-8">
+      <p className="text-base-content max-w-2xl mx-auto text-center mb-8">
         Dive into a curated selection of blogs on tech, lifestyle, education,
-        and business. Stay informed, inspired, and up-to-date with the latest
-        ideas and stories from our growing community.
+        and business. Stay informed and inspired with our growing community.
       </p>
+
       {/* Filter and Search */}
-      <div className="flex flex-col md:flex-row justify-end items-center mb-10 gap-6 ">
-        {/* Category Filter */}
+      <div className="flex flex-col md:flex-row justify-end items-center mb-10 gap-6">
         <div className="w-full md:w-1/3">
-          <label
-            htmlFor="category"
-            className="block mb-1 text-base font-medium text-base-content"
-          >
+          <label className="block mb-1 text-base font-medium text-base-content">
             Category
           </label>
           <select
-            id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-orange-400 shadow-sm bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat === "All" ? "" : cat}>
@@ -108,73 +103,69 @@ const BlogsPage = () => {
           </select>
         </div>
 
-        {/* Search Input */}
         <div className="w-full md:w-2/3">
-          <label
-            htmlFor="search"
-            className="block mb-1 text-base font-medium text-base-content"
-          >
+          <label className="block mb-1 text-base font-medium text-base-content">
             Search by Title
           </label>
           <input
-            id="search"
             type="text"
             placeholder="Search blog by title..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-orange-400 shadow-sm bg-base-100 text-base-content focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
           />
         </div>
       </div>
 
       {/* Blog Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {blogs.map((blog, index) => (
-          <motion.div
-            key={blog._id}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="bg-base-100 rounded-sm shadow-sm shadow-orange-300 flex flex-col h-full"
-          >
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="w-full h-56 object-cover"
-            />
-
-            <div className="flex flex-col justify-between p-5 flex-grow">
-              <div>
-                <h2 className="text-xl font-bold text-orange-500 dark:text-orange-500 mb-1">
-                  {blog.title}
-                </h2>
-                <p className="text-sm text-base-content mb-2">
-                  {blog.shortDescription?.slice(0, 100)}...
-                </p>
-                <p className="text-xs text-orange-500">
-                  Category: {blog.category}
-                </p>
+      {filteredBlogs.length === 0 ? (
+        <p className="text-center text-base-content">No blogs found.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {filteredBlogs.map((blog, index) => (
+            <motion.div
+              key={blog._id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.03, duration: 0.4 }}
+              className="bg-base-100 rounded-sm shadow-sm shadow-orange-300 flex flex-col h-full"
+            >
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full rounded-t-sm h-56 object-cover"
+              />
+              <div className="flex flex-col justify-between p-5 flex-grow">
+                <div>
+                  <h2 className="text-xl font-bold text-orange-500 mb-1">
+                    {blog.title}
+                  </h2>
+                  <p className="text-sm text-base-content mb-2">
+                    {blog.shortDescription?.slice(0, 100)}...
+                  </p>
+                  <p className="text-xs text-orange-500">
+                    Category: {blog.category}
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mt-auto pt-4">
+                  <button
+                    onClick={() => navigate(`/blog/${blog._id}`)}
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-md"
+                  >
+                    Details
+                  </button>
+                  <button
+                    onClick={() => handleWishlist(blog)}
+                    className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm py-2 rounded-md"
+                  >
+                    Wishlist
+                  </button>
+                </div>
               </div>
-
-              {/* Button section anchored to bottom */}
-              <div className="grid grid-cols-2 gap-2 mt-auto pt-4">
-                <button
-                  onClick={() => navigate(`/blog/${blog._id}`)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold py-2 rounded-md transition-all duration-200"
-                >
-                  Details
-                </button>
-                <button
-                  onClick={() => handleWishlist(blog)}
-                  className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm font-semibold py-2 rounded-md transition-all duration-200"
-                >
-                  Wishlist
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

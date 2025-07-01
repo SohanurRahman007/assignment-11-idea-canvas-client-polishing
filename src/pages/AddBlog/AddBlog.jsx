@@ -58,10 +58,10 @@ const AddBlog = () => {
       >
         <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-lg transition-colors">
           <div className="space-y-2 col-span-full lg:col-span-1">
-            <h2 className="font-medium text-3xl text-orange-500">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">
               Add a New Blog
             </h2>
-            <p className="text-md text-base-content">
+            <p className="text-base-content mt-1.5 max-w-2xl mx-auto">
               Fill out the blog information to share your thoughts with the
               world.
             </p>
@@ -78,10 +78,10 @@ const AddBlog = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
+                className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
                 required
               >
-                <option className="text-base-content bg-base-100" value="">
+                <option className="text-base-content bg-base-100 " value="">
                   Select Category
                 </option>
                 <option className="text-base-content bg-base-100" value="Tech">
@@ -117,7 +117,7 @@ const AddBlog = () => {
                 placeholder="Enter blog title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
+                className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
                 required
               />
             </div>
@@ -134,7 +134,7 @@ const AddBlog = () => {
                 placeholder="Enter image URL"
                 value={formData.image}
                 onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
+                className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
                 required
               />
             </div>
@@ -150,7 +150,7 @@ const AddBlog = () => {
                 placeholder="Write a short summary..."
                 value={formData.shortDescription}
                 onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
+                className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
                 required
               ></textarea>
             </div>
@@ -166,7 +166,7 @@ const AddBlog = () => {
                 placeholder="Write your full blog content..."
                 value={formData.longDescription}
                 onChange={handleChange}
-                className="w-full rounded-md p-2 border border-gray-400"
+                className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
                 rows="6"
                 required
               ></textarea>
