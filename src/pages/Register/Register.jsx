@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createUser, googleLogin } = useContext(AuthContext);
@@ -74,6 +75,9 @@ const Register = () => {
 
   return (
     <div className="my-7 flex flex-col">
+      <Helmet>
+        <title>Register | Idea Canvas</title>
+      </Helmet>
       <div className="card text-black w-full mx-auto md:w-5/12 shrink-0 shadow-2xl ">
         <div className="w-full mx-auto rounded-b-md sm:p-8 text-black dark:text-white">
           <h2 className="mb-3 text-3xl font-semibold text-center text-orange-500">

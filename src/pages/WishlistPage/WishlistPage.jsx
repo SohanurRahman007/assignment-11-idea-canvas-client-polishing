@@ -16,6 +16,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import Loading from "../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const WishlistPage = () => {
   const { user, loading } = useContext(AuthContext);
@@ -126,6 +127,9 @@ const WishlistPage = () => {
 
   return (
     <div className="mx-auto  py-10">
+      <Helmet>
+        <title>WishList | Idea Canvas</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-orange-500 text-center mb-2">
         Your Wishlist
       </h2>

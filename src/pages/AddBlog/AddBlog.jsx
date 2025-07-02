@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const AddBlog = () => {
   const { user } = useContext(AuthContext);
@@ -52,6 +53,9 @@ const AddBlog = () => {
 
   return (
     <section className="mt-5 mb-5">
+      <Helmet>
+        <title>Add Blog | Idea Canvas</title>
+      </Helmet>
       <form
         onSubmit={handleSubmit}
         className="container flex flex-col mx-auto space-y-12"

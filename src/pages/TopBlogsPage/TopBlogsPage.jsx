@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../../components/Loading/Loading";
 import { FaRegStar } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const TopBlogsPage = () => {
   const { loading } = useContext(AuthContext);
@@ -17,6 +18,9 @@ const TopBlogsPage = () => {
 
   return (
     <div className=" mx-auto  py-10">
+      <Helmet>
+        <title>Top Blogs | Idea Canvas</title>
+      </Helmet>
       {/* Title Section */}
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-orange-500 flex justify-center items-center gap-2">

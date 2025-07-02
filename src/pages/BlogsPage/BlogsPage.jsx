@@ -5,6 +5,7 @@ import Loading from "../../components/Loading/Loading";
 import { AuthContext } from "../../provider/AuthProvider";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const categories = ["All", "Tech", "Life", "Education", "Business"];
 
@@ -76,6 +77,9 @@ const BlogsPage = () => {
 
   return (
     <section className="mx-auto py-10">
+      <Helmet>
+        <title>All Blogs | Idea Canvas</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-orange-500 text-center mb-2">
         Explore Insightful Blog Posts
       </h1>

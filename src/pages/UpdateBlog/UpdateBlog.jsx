@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const UpdateBlog = () => {
   const { id } = useParams();
@@ -69,6 +70,10 @@ const UpdateBlog = () => {
 
   return (
     <section className="max-w-5xl mx-auto p-6 bg-base-100 rounded-sm shadow-sm mt-10">
+      <Helmet>
+        <title>Update | Idea Canvas</title>
+      </Helmet>
+
       <h2 className="text-3xl font-bold text-orange-500 mb-6">Update Blog</h2>
       <p className="text-base-content mt-1.5 max-w-2xl mb-6">
         Use this form to update your blog post with the latest content, image,
