@@ -154,13 +154,13 @@ const BlogsPage = () => {
                 <div className="grid grid-cols-2 gap-2 mt-auto pt-4">
                   <button
                     onClick={() => navigate(`/blog/${blog._id}`)}
-                    className="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-md"
+                    className="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-sm cursor-pointer"
                   >
                     Details
                   </button>
                   <button
                     onClick={() => handleWishlist(blog)}
-                    className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm py-2 rounded-md"
+                    className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white text-sm py-2 rounded-sm cursor-pointer"
                   >
                     Wishlist
                   </button>
