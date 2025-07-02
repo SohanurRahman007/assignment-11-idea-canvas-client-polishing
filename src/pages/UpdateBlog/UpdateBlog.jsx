@@ -94,7 +94,7 @@ const UpdateBlog = () => {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="select select-bordered w-full"
+              className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               required
             >
               <option disabled value="">
@@ -117,7 +117,7 @@ const UpdateBlog = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="input input-bordered w-full"
+              className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               placeholder="Enter blog title"
               required
             />
@@ -133,7 +133,7 @@ const UpdateBlog = () => {
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className="input input-bordered w-full"
+              className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               placeholder="Enter image URL"
               required
             />
@@ -148,7 +148,7 @@ const UpdateBlog = () => {
               name="shortDescription"
               value={formData.shortDescription}
               onChange={handleChange}
-              className="textarea textarea-bordered w-full"
+              className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               placeholder="Write a short summary..."
               required
             ></textarea>
@@ -163,7 +163,7 @@ const UpdateBlog = () => {
               name="longDescription"
               value={formData.longDescription}
               onChange={handleChange}
-              className="textarea textarea-bordered w-full"
+              className="w-full px-4 py-2 rounded-sm bg-base-100 border-2 border-gray-300 focus:outline-none focus:border-orange-500"
               placeholder="Write the full content..."
               rows={6}
               required
