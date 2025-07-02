@@ -34,7 +34,7 @@ const cardVariant = {
 
 const WhatYoullGet = () => {
   return (
-    <section className="mt-12  mb-8">
+    <section className="mt-6  mb-8">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">
           What You’ll Get with IdeaCanvas
