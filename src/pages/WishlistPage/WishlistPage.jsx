@@ -26,7 +26,9 @@ const WishlistPage = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/wishlist?email=${user.email}`)
+        .get(
+          `https://b11a11-server-side-sohanpk24.vercel.app/wishlist?email=${user.email}`
+        )
         .then((res) => {
           console.log("Wishlist response:", res.data); // 🔍 check structure
           setWishlist(res.data);
@@ -52,7 +54,9 @@ const WishlistPage = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/wishlist/${id}`);
+        await axios.delete(
+          `https://b11a11-server-side-sohanpk24.vercel.app/wishlist/${id}`
+        );
         toast.success("Removed from wishlist");
         setWishlist((prev) => prev.filter((item) => item._id !== id));
       } catch (err) {

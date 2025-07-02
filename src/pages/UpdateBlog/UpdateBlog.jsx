@@ -22,7 +22,7 @@ const UpdateBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blog/${id}`)
+      .get(`https://b11a11-server-side-sohanpk24.vercel.app/blog/${id}`)
       .then((res) => {
         const blog = res.data;
         if (user?.email !== blog.email) {
@@ -57,7 +57,10 @@ const UpdateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/blog/${id}`, formData);
+      await axios.put(
+        `https://b11a11-server-side-sohanpk24.vercel.app/blog/${id}`,
+        formData
+      );
       toast.success("Blog updated successfully!");
       navigate(`/blog/${id}`);
     } catch (err) {

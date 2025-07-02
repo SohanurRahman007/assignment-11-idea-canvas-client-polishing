@@ -11,7 +11,9 @@ const RecentBlogs = () => {
   const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/recent").then((res) => setBlogs(res.data));
+    axios
+      .get("https://b11a11-server-side-sohanpk24.vercel.app/recent")
+      .then((res) => setBlogs(res.data));
   }, []);
 
   const handleWishlist = async (blog) => {
@@ -29,7 +31,7 @@ const RecentBlogs = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/wishlist",
+        "https://b11a11-server-side-sohanpk24.vercel.app/wishlist",
         wishlistItem
       );
       if (res.data.success) {

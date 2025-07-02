@@ -9,7 +9,7 @@ const TopBlogsPage = () => {
   const [topBlogs, setTopBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/blogs/top")
+    fetch("https://b11a11-server-side-sohanpk24.vercel.app/blogs/top")
       .then((res) => res.json())
       .then((data) => setTopBlogs(data));
   }, []);

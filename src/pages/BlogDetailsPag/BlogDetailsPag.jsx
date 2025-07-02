@@ -16,12 +16,16 @@ const BlogDetailsPage = () => {
   const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/blog/${id}`).then((res) => {
-      setBlog(res.data);
-    });
-    axios.get(`http://localhost:3000/comments/${id}`).then((res) => {
-      setComments(res.data);
-    });
+    axios
+      .get(`https://b11a11-server-side-sohanpk24.vercel.app/blog/${id}`)
+      .then((res) => {
+        setBlog(res.data);
+      });
+    axios
+      .get(`https://b11a11-server-side-sohanpk24.vercel.app/comments/${id}`)
+      .then((res) => {
+        setComments(res.data);
+      });
   }, [id]);
 
   const handleComment = async () => {
@@ -34,7 +38,7 @@ const BlogDetailsPage = () => {
     };
     try {
       const res = await axios.post(
-        "http://localhost:3000/comments",
+        "https://b11a11-server-side-sohanpk24.vercel.app/comments",
         commentData
       );
       if (res.data.success) {
