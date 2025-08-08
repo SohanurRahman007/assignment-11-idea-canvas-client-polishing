@@ -92,7 +92,7 @@ const Navbar = () => {
     <>
       {/* ===== Navbar Main ===== */}
       <nav className="bg-base-100 sticky top-0 z-50 shadow-sm w-full">
-        <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div className="max-w-screen-xl mx-auto  py-3 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-sm" />

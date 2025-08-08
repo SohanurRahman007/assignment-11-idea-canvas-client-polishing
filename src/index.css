@@ -6,6 +6,15 @@
   themes: light --default, dark --prefersdark, cupcake;
 }
 
+/* Global CSS reset is good practice */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  /* Use the font family globally */
+  font-family: "Roboto Condensed", sans-serif;
+}
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;

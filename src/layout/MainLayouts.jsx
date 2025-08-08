@@ -7,9 +7,9 @@ const MainLayouts = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="md:w-7xl mx-auto">
+      <div className="w-full">
         <Toaster position="top-right" reverseOrder={false} />
-        <div className="min-h-[calc(100vh-160px)]">
+        <div className="min-h-[calc(100vh-160px)] max-w-7xl mx-auto ">
           <Outlet></Outlet>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import { Link } from "react-router";
 
 const slides = [
   {
@@ -54,9 +55,11 @@ const Banner = () => {
                   <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6">
                     {slide.desc}
                   </p>
-                  <button className="bg-orange-400 hover:bg-orange-500 transition-colors duration-300 text-white font-semibold px-6 py-3 rounded shadow-lg">
-                    Explore Blogs
-                  </button>
+                  <Link to="/allBlogs">
+                    <button className="bg-orange-400 hover:bg-orange-500 transition-colors duration-300 text-white font-semibold px-6 py-3 rounded shadow-lg cursor-pointer">
+                      Explore Blogs
+                    </button>
+                  </Link>
                 </motion.div>
               </div>
             </div>
