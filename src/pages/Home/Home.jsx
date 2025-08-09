@@ -6,6 +6,7 @@ import RecentBlogs from "../../components/RecentBlogs/RecentBlogs";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import WhatYoullGet from "../../components/WhatYoullGet/WhatYoullGet";
 import { Helmet } from "react-helmet-async";
+import FeaturedPost from "../../components/FeaturedPost/FeaturedPost";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <RecentBlogs></RecentBlogs>
       <Slider></Slider>
       <QuickTips></QuickTips>
+      <FeaturedPost />
       <WhatYoullGet></WhatYoullGet>
       <Newsletter></Newsletter>
     </div>
