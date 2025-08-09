@@ -39,6 +39,8 @@ const Navbar = () => {
     }
   };
 
+  console.log(user);
+
   const navItems = (
     <>
       <NavLink

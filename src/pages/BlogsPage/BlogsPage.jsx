@@ -38,7 +38,10 @@ const BlogsPage = () => {
         if (category !== "All") params.category = category;
         if (search.trim() !== "") params.search = search.trim();
 
-        const res = await axios.get("http://localhost:3000/blogs", { params });
+        const res = await axios.get(
+          "https://b11a11-server-side-sohanpk24.vercel.app/blogs",
+          { params }
+        );
         setBlogs(res.data.blogs);
         setTotalPages(Math.ceil(res.data.totalBlogs / blogsPerPage));
       } catch (error) {
@@ -57,13 +60,16 @@ const BlogsPage = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/wishlist", {
-        blogId: blog._id,
-        title: blog.title,
-        image: blog.image,
-        category: blog.category,
-        userEmail: user.email,
-      });
+      const res = await axios.post(
+        "https://b11a11-server-side-sohanpk24.vercel.app/wishlist",
+        {
+          blogId: blog._id,
+          title: blog.title,
+          image: blog.image,
+          category: blog.category,
+          userEmail: user.email,
+        }
+      );
 
       if (res.data.success) {
         toast.success("Added to wishlist");

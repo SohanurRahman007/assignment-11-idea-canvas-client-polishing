@@ -61,9 +61,12 @@ const BlogDetailsPage = () => {
     setUserLiked(!userLiked);
 
     try {
-      await axios.put(`http://localhost:3000/blog/${blog._id}/like`, {
-        userEmail: user.email,
-      });
+      await axios.put(
+        `https://b11a11-server-side-sohanpk24.vercel.app/blog/${blog._id}/like`,
+        {
+          userEmail: user.email,
+        }
+      );
     } catch (error) {
       console.error("Failed to update like status:", error);
       toast.error("Failed to update like status.");

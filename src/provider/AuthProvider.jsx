@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
@@ -33,6 +34,20 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // ✅ New: Update user profile
+  const updateUser = (name, photoURL) => {
+    if (!auth.currentUser) return;
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    }).then(() => {
+      // Optional: update local state so Navbar updates instantly
+      setUser({ ...auth.currentUser });
+      setLoading(false);
+    });
+  };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -57,6 +72,7 @@ const AuthProvider = ({ children }) => {
     loginUser,
     logOut,
     googleLogin,
+    updateUser,
   };
 
   return (

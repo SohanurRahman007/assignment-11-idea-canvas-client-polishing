@@ -6,8 +6,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { FaUserCircle } from "react-icons/fa";
 import axios from "axios";
-// Import the updateProfile function directly from firebase/auth
-import { updateProfile } from "firebase/auth";
+
+// The updateProfile function is now handled directly inside AuthProvider's createUser function.
+// So we no longer need to import it here.
+// import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   // We no longer destructure updateUserProfile from AuthContext
@@ -105,15 +107,10 @@ const Register = () => {
       photoURL = "https://source.unsplash.com/100x100/?portrait";
     }
 
-    // Create user and update profile
+    // Create user and update profile using the unified createUser function
     try {
-      const userCredential = await createUser(email, password);
-
-      // We are now using the imported updateProfile function directly.
-      await updateProfile(userCredential.user, {
-        displayName: name,
-        photoURL: photoURL,
-      });
+      // ✅ Now we pass name and photoURL directly to the createUser function
+      await createUser(email, password, name, photoURL);
 
       toast.success("Registration successful!", { id: toastId });
       navigate(location.state || "/");
@@ -141,7 +138,7 @@ const Register = () => {
       <Helmet>
         <title>Register | Idea Canvas</title>
       </Helmet>
-      <div className="w-full max-w-lg p-8 space-y-6  rounded-xl shadow-md shadow-orange-300 transition-all duration-300 transform scale-100">
+      <div className="w-full max-w-lg p-8 space-y-6 rounded-xl shadow-md shadow-orange-300 transition-all duration-300 transform scale-100">
         <div className="text-center">
           <h2 className="text-4xl font-bold text-orange-500">
             Create an Account
@@ -200,7 +197,7 @@ const Register = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
                 required
               />
             </div>
@@ -220,7 +217,7 @@ const Register = () => {
                   id="photo"
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
+                  className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
                 />
                 {previewUrl ? (
                   <img
@@ -250,7 +247,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="you@example.com"
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
+              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
               required
             />
           </div>
@@ -272,7 +269,7 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="********"
-              className="w-full px-4 py-2 mt-1 pr-10 border border-gray-300 rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
+              className="w-full px-4 py-2 mt-1 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-300"
               required
             />
             <button
