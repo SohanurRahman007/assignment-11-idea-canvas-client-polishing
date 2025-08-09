@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import ArticleModal from "../ArticleModal/ArticleModal";
 
 const FeaturedPost = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <section className="py-6 mt-6 mb-10 shadow-sm shadow-orange-300">
       <div className="mx-auto  lg:px-6">
@@ -37,13 +43,17 @@ const FeaturedPost = () => {
               and personalized user experiences.
             </p>
             <div className="mt-4">
-              <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-all">
+              <button
+                onClick={openModal}
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-all"
+              >
                 Read Article
               </button>
             </div>
           </div>
         </div>
       </div>
+      <ArticleModal isOpen={isModalOpen} onClose={closeModal} />
     </section>
   );
 };
