@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import Loading from "../components/Loading/Loading";
 
 // StatCard component for a clean, reusable UI element
 const StatCard = ({ title, value, icon, color }) => (
@@ -77,13 +78,7 @@ const Dashboard = () => {
   }, [user?.email]); // Dependency array: Re-run effect if the user's email changes
 
   // Display a loading indicator while data is being fetched
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-dots loading-lg text-orange-400"></span>
-      </div>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <div className="p-6 bg-gray-50  min-h-screen">

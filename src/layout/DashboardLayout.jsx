@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import {
-  Home,
-  NotebookText,
-  User,
-  Menu,
-  X,
-  Users,
-  ArrowLeft,
-} from "lucide-react";
+import { Home, User, Menu, X, Users, ArrowLeft } from "lucide-react";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -16,15 +8,14 @@ const DashboardLayout = () => {
   // A list of items for the sidebar navigation with updated icons
   const navItems = [
     { to: "/dashboard", icon: Home, name: "Dashboard" },
-    { to: "/allSubscribe", icon: Users, name: "All Subscriber" }, // Changed icon to Users
-    { to: "/profile", icon: User, name: "Profile" },
-    { to: "/", icon: ArrowLeft, name: "Go Home" }, // Changed icon to ArrowLeft
+    { to: "/allSubscribe", icon: Users, name: "All Subscriber" },
+    { to: "/dashboard/profile", icon: User, name: "Profile" },
+    { to: "/", icon: ArrowLeft, name: "Go Home" },
   ];
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-base-content">
       {/* Sidebar with sticky position */}
-      {/* Removed lg:relative to make it fixed on large screens as well */}
       <aside
         className={`w-64 bg-white shadow-md transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -44,9 +35,10 @@ const DashboardLayout = () => {
             <NavLink
               key={item.name}
               to={item.to}
-              onClick={() => setIsSidebarOpen(false)} // Close sidebar on mobile
+              onClick={() => setIsSidebarOpen(false)}
+              end={item.to === "/dashboard"}
               className={({ isActive }) =>
-                `flex items-center gap-4 p-3 rounded-lg transition-colors duration-200
+                `flex items-center gap-4 p-2 rounded-lg transition-colors duration-200
                 ${
                   isActive
                     ? "bg-orange-400 text-white"
@@ -62,7 +54,6 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Main content area */}
-      {/* Added ml-64 for large screens to give space for the fixed sidebar */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-64">
         {/* Mobile header with menu button */}
         <header className="bg-white p-4 shadow-sm lg:hidden flex items-center justify-between">
