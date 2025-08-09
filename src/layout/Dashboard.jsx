@@ -34,16 +34,20 @@ const Dashboard = () => {
       setIsLoading(true);
       try {
         // Fetch total blogs count
-        const blogsCountRes = await fetch("http://localhost:3000/blogs/count");
+        const blogsCountRes = await fetch(
+          "https://b11a11-server-side-sohanpk24.vercel.app/blogs/count"
+        );
         const blogsCountData = await blogsCountRes.json();
 
         // Fetch total likes count
-        const likesCountRes = await fetch("http://localhost:3000/likes/count");
+        const likesCountRes = await fetch(
+          "https://b11a11-server-side-sohanpk24.vercel.app/likes/count"
+        );
         const likesCountData = await likesCountRes.json();
 
         // Fetch total comments count
         const commentsCountRes = await fetch(
-          "http://localhost:3000/comments/count"
+          "https://b11a11-server-side-sohanpk24.vercel.app/comments/count"
         );
         const commentsCountData = await commentsCountRes.json();
 
@@ -52,7 +56,7 @@ const Dashboard = () => {
         let wishlistData = [];
         if (user?.email) {
           const wishlistRes = await fetch(
-            `http://localhost:3000/wishlist?email=${user.email}`
+            `https://b11a11-server-side-sohanpk24.vercel.app/wishlist?email=${user.email}`
           );
           wishlistData = await wishlistRes.json();
         }
@@ -66,25 +70,21 @@ const Dashboard = () => {
         });
       } catch (error) {
         console.error("Failed to fetch dashboard data:", error);
-        // Optionally, handle error state or show a message to the user
       } finally {
-        // Always set loading to false after the fetch attempt is complete
         setIsLoading(false);
       }
     };
 
-    // Call the fetch function when the component mounts or user changes
     fetchDashboardData();
-  }, [user?.email]); // Dependency array: Re-run effect if the user's email changes
+  }, [user?.email]);
 
-  // Display a loading indicator while data is being fetched
   if (isLoading) return <Loading />;
 
   return (
     <div className="p-6 bg-gray-50  min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {/* Dashboard Header */}
-        <div className="bg-white  rounded-xl shadow-md p-8 mb-8">
+        <div className="bg-white  rounded-md shadow-orange-300 shadow-sm p-8 mb-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 mb-2">
             Welcome, {user?.displayName || "User"}!
           </h1>
@@ -123,7 +123,7 @@ const Dashboard = () => {
         </div>
 
         {/* Thank You Message Section */}
-        <div className="bg-white rounded-md shadow-md p-8 text-center">
+        <div className="bg-white rounded-md shadow-orange-300 shadow-sm p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
             Thank you for being a valuable member!
           </h2>

@@ -30,7 +30,7 @@ const DashboardLayout = () => {
             <X size={24} />
           </button>
         </div>
-        <nav className="flex-1 px-4 py-6 space-y-2">
+        <nav className="flex-1 px-4 py-6 space-y-2 text-base-content">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
@@ -38,11 +38,11 @@ const DashboardLayout = () => {
               onClick={() => setIsSidebarOpen(false)}
               end={item.to === "/dashboard"}
               className={({ isActive }) =>
-                `flex items-center gap-4 p-2 rounded-lg transition-colors duration-200
+                `flex items-center gap-4 p-2 rounded-lg transition-colors duration-200 text-base-content
                 ${
                   isActive
                     ? "bg-orange-400 text-white"
-                    : "text-base-content hover:bg-gray-200"
+                    : "text-gray-900 hover:bg-gray-200"
                 }`
               }
             >
