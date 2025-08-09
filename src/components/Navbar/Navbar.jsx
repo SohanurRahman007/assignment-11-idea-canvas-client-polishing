@@ -85,6 +85,15 @@ const Navbar = () => {
           >
             Wishlist
           </NavLink>
+
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive ? "text-orange-400 font-bold" : "hover:text-orange-400"
+            }
+          >
+            Dashboard
+          </NavLink>
         </>
       )}
     </>

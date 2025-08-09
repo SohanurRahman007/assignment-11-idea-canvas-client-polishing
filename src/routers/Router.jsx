@@ -15,6 +15,8 @@ import AboutEvent from "../components/Footer/AboutEvent";
 import Teams from "../components/Footer/Teams";
 import PrivacyPolicy from "../components/Footer/PrivacyPolicy";
 import CookiesPolicy from "../components/Footer/CookiesPolicy";
+import Dashboard from "../layout/Dashboard";
+import DashboardLayout from "../layout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +28,7 @@ export const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
+
       {
         path: "/addBlog",
         element: (
@@ -86,6 +89,26 @@ export const router = createBrowserRouter([
         path: "cookies",
         Component: CookiesPolicy,
       },
+    ],
+  },
+
+  {
+    path: "/dashboard", // The path for the dashboard area
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
+    children: [
+      {
+        index: true, // This is the default child route for /dashboard
+        element: <Dashboard />,
+      },
+      // You can add other dashboard-related routes here, like a profile page
+      // {
+      //   path: "profile",
+      //   element: <ProfilePage />,
+      // }
     ],
   },
 ]);
