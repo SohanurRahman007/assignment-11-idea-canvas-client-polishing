@@ -116,7 +116,7 @@ const Newsletter = () => {
                       ? "Your Age"
                       : "Your Country"
                   }
-                  className="px-4 py-3 rounded-md border border-gray-300 placeholder:text-base-content  focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                  className="px-4 py-3 rounded-md border border-gray-300 placeholder:text-white text-white  focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
                   min={field === "age" ? "1" : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

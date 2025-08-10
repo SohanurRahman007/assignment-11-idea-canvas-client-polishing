@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Loading from "../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ProfilePage = () => {
   // Get the user from your authentication context

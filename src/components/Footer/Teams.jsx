@@ -44,7 +44,7 @@ const Teams = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="bg-base-100 rounded-sm shadow hover:shadow-md p-6 text-center"
+            className="bg-base-100 rounded-sm shadow shadow-orange-300 hover:shadow-md p-6 text-center"
           >
             <img
               src={member.image}
