@@ -154,7 +154,7 @@ const BlogDetailsPage = () => {
           {isOwner && (
             <button
               onClick={() => navigate(`/update-blog/${id}`)}
-              className="btn btn-warning w-fit"
+              className="btn btn-warning text-white bg-orange-400 hover:bg-orange-500 w-fit"
             >
               ✏️ Update Blog
             </button>

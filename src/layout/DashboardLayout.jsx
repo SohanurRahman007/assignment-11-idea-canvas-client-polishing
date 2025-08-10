@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import { Home, User, Menu, X, Users, ArrowLeft } from "lucide-react";
+import logo from "../assets/logo/logo.png";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,7 +23,12 @@ const DashboardLayout = () => {
         } fixed inset-y-0 left-0 z-40 h-screen flex flex-col lg:translate-x-0`}
       >
         <div className="flex items-center justify-between p-4 border-b border-orange-500">
-          <span className="text-xl font-bold text-orange-400">Dashboard</span>
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logo} alt="Logo" className="w-10 h-10 rounded-sm" />
+            <span className="text-xl font-bold text-base-content">
+              Idea <span className="text-orange-400">Canvas</span>
+            </span>
+          </Link>
           <button
             onClick={() => setIsSidebarOpen(false)}
             className="lg:hidden text-base-content"

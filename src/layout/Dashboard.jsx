@@ -4,7 +4,9 @@ import Loading from "../components/Loading/Loading";
 
 // StatCard component for a clean, reusable UI element
 const StatCard = ({ title, value, icon, color }) => (
-  <div className={`p-6 rounded-xl shadow-md flex items-center gap-4 ${color}`}>
+  <div
+    className={`p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center gap-4 text-white transform transition-transform hover:scale-105 duration-300 cursor-pointer ${color}`}
+  >
     <div className="text-4xl text-white">{icon}</div>
     <div>
       <h3 className="text-2xl font-semibold text-white">{value}</h3>
@@ -50,6 +52,8 @@ const Dashboard = () => {
           "https://b11a11-server-side-sohanpk24.vercel.app/comments/count"
         );
         const commentsCountData = await commentsCountRes.json();
+
+        console.log("comment", commentsCountData);
 
         // Fetch wishlist items for the current user
         // Ensure the user object exists and has an email before fetching
