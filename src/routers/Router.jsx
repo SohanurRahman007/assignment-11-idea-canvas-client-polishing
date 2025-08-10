@@ -18,6 +18,7 @@ import CookiesPolicy from "../components/Footer/CookiesPolicy";
 import Dashboard from "../layout/Dashboard";
 import DashboardLayout from "../layout/DashboardLayout";
 import ProfilePage from "../dashboard/ProfilePage";
+import AllSubscribe from "../dashboard/AllSubscribe";
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "allSubscribe",
+        element: <AllSubscribe />,
       },
       {
         path: "profile",

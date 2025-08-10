@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import Loading from "../components/Loading/Loading";
 
 const ProfilePage = () => {
   // Get the user from your authentication context
@@ -38,16 +39,13 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-dots loading-lg text-orange-400"></span>
-      </div>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+      <Helmet>
+        <title>User Profile | Idea Canvas</title>
+      </Helmet>
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-md shadow-orange-300 shadow-sm p-8">
           {/* Header Section */}

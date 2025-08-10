@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import { Home, User, Menu, X, Users, ArrowLeft } from "lucide-react";
 import logo from "../assets/logo/logo.png";
+import { Helmet } from "react-helmet-async";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,13 +10,16 @@ const DashboardLayout = () => {
   // A list of items for the sidebar navigation with updated icons
   const navItems = [
     { to: "/dashboard", icon: Home, name: "Dashboard" },
-    { to: "/allSubscribe", icon: Users, name: "All Subscriber" },
+    { to: "/dashboard/allSubscribe", icon: Users, name: "All Subscriber" },
     { to: "/dashboard/profile", icon: User, name: "Profile" },
     { to: "/", icon: ArrowLeft, name: "Go Home" },
   ];
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-base-content">
+      <Helmet>
+        <title>Dashboard | Idea Canvas</title>
+      </Helmet>
       {/* Sidebar with sticky position */}
       <aside
         className={`w-64 bg-white shadow-md transition-transform duration-300 ease-in-out ${
