@@ -19,6 +19,7 @@ import Dashboard from "../layout/Dashboard";
 import DashboardLayout from "../layout/DashboardLayout";
 import ProfilePage from "../dashboard/ProfilePage";
 import AllSubscribe from "../dashboard/AllSubscribe";
+import UserBlogs from "../dashboard/UserBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -109,6 +110,10 @@ export const router = createBrowserRouter([
       {
         path: "allSubscribe",
         element: <AllSubscribe />,
+      },
+      {
+        path: "my-blogs",
+        element: <UserBlogs />,
       },
       {
         path: "profile",

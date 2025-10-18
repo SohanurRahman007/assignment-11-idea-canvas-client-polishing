@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
-import { Home, User, Menu, X, Users, ArrowLeft } from "lucide-react";
+import { Home, User, Menu, X, Users, ArrowLeft, FileText } from "lucide-react";
 import logo from "../assets/logo/logo.png";
 import { Helmet } from "react-helmet-async";
 
@@ -10,6 +10,7 @@ const DashboardLayout = () => {
   const navItems = [
     { to: "/dashboard", icon: Home, name: "Dashboard" },
     { to: "/dashboard/allSubscribe", icon: Users, name: "All Subscriber" },
+    { to: "/dashboard/my-blogs", icon: FileText, name: "My Blogs" },
     { to: "/dashboard/profile", icon: User, name: "Profile" },
     { to: "/", icon: ArrowLeft, name: "Go Home" },
   ];
