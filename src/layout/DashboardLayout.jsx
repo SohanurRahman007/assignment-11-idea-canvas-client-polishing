@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet-async";
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // A list of items for the sidebar navigation with updated icons
   const navItems = [
     { to: "/dashboard", icon: Home, name: "Dashboard" },
     { to: "/dashboard/allSubscribe", icon: Users, name: "All Subscriber" },
@@ -16,31 +15,33 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100 text-base-content">
+    <div className="flex min-h-screen bg-base-100 text-base-content">
       <Helmet>
         <title>Dashboard | Idea Canvas</title>
       </Helmet>
-      {/* Sidebar with sticky position */}
+
+      {/* Sidebar with orange theme */}
       <aside
-        className={`w-64 bg-white shadow-md transition-transform duration-300 ease-in-out ${
+        className={`w-64 bg-base-100 shadow-sm border-r border-orange-200 transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } fixed inset-y-0 left-0 z-40 h-screen flex flex-col lg:translate-x-0`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-orange-500">
+        <div className="flex items-center justify-between p-4 border-b border-orange-200">
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Logo" className="w-10 h-10 rounded-sm" />
             <span className="text-xl font-bold text-base-content">
-              Idea <span className="text-orange-400">Canvas</span>
+              Idea <span className="text-orange-500">Canvas</span>
             </span>
           </Link>
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="lg:hidden text-base-content"
+            className="lg:hidden text-base-content hover:text-orange-500 transition-colors"
           >
             <X size={24} />
           </button>
         </div>
-        <nav className="flex-1 px-4 py-6 space-y-2 text-base-content">
+
+        <nav className="flex-1 px-4 py-6 space-y-2">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
@@ -48,15 +49,18 @@ const DashboardLayout = () => {
               onClick={() => setIsSidebarOpen(false)}
               end={item.to === "/dashboard"}
               className={({ isActive }) =>
-                `flex items-center gap-4 p-2 rounded-lg transition-colors duration-200 text-base-content
+                `flex items-center gap-4 p-3 rounded-lg transition-all duration-200 group
                 ${
                   isActive
-                    ? "bg-orange-400 text-white"
-                    : "text-gray-900 hover:bg-gray-200"
+                    ? "bg-orange-500 text-white shadow-sm"
+                    : "text-base-content hover:bg-orange-50 hover:text-orange-500 border border-transparent hover:border-orange-200"
                 }`
               }
             >
-              <item.icon size={20} />
+              <item.icon
+                size={20}
+                className="group-hover:scale-110 transition-transform"
+              />
               <span className="font-medium">{item.name}</span>
             </NavLink>
           ))}
@@ -65,20 +69,20 @@ const DashboardLayout = () => {
 
       {/* Main content area */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-64">
-        {/* Mobile header with menu button */}
-        <header className="bg-white p-4 shadow-sm lg:hidden flex items-center justify-between">
+        {/* Mobile header */}
+        <header className="bg-base-100 p-4 shadow-sm lg:hidden flex items-center justify-between border-b border-orange-200">
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="text-base-content"
+            className="text-base-content hover:text-orange-500 transition-colors"
           >
             <Menu size={24} />
           </button>
-          <span className="text-xl font-bold text-orange-400">Dashboard</span>
-          <div className="w-6"></div> {/* Spacer for alignment */}
+          <span className="text-xl font-bold text-orange-500">Dashboard</span>
+          <div className="w-6"></div>
         </header>
 
-        {/* This is where the specific dashboard page content will be rendered */}
-        <main className="flex-1 p-6 overflow-x-hidden overflow-y-auto">
+        {/* Main content */}
+        <main className="flex-1 p-6 overflow-x-hidden overflow-y-auto bg-base-100">
           <Outlet />
         </main>
       </div>

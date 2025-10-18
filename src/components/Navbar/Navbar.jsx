@@ -34,6 +34,7 @@ const Navbar = () => {
         await logOut();
         Swal.fire("Logged out!", "You have been logged out.", "success");
       } catch (error) {
+        console.log(error);
         Swal.fire("Error!", "Logout failed.", "error");
       }
     }
