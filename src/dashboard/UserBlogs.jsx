@@ -351,7 +351,7 @@ const UserBlogs = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Engagement Rate */}
-              <div className="bg-orange-50 rounded-lg p-4">
+              <div className=" rounded-lg p-4">
                 <h4 className="font-semibold text-orange-500 mb-2">
                   Engagement Rate
                 </h4>
@@ -383,7 +383,7 @@ const UserBlogs = () => {
               </div>
 
               {/* Average Performance */}
-              <div className="bg-orange-50 rounded-lg p-4">
+              <div className=" rounded-lg p-4">
                 <h4 className="font-semibold text-orange-500 mb-2">
                   Average Performance
                 </h4>
