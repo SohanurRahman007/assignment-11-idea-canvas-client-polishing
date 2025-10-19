@@ -256,15 +256,6 @@ const BlogDetailsPage = () => {
             type="related"
           />
         </div>
-        {/* Personalized Recommendations (if user is logged in) */}
-        {user && (
-          <div className="mt-8">
-            <ContentRecommendations
-              userEmail={user.email}
-              type="personalized"
-            />
-          </div>
-        )}
       </div>
     </div>
   );
