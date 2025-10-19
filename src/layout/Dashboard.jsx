@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Loading from "../components/Loading/Loading";
 import { motion } from "framer-motion";
-
 // StatCard component matching your RecentBlogs design
 const StatCard = ({ title, value, icon, delay }) => (
   <motion.div
