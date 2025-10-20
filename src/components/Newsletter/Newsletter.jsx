@@ -11,30 +11,6 @@ const Newsletter = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const saveToDatabase = async (data) => {
-    setIsSubmitting(true);
-    try {
-      const response = await fetch(
-        "https://b11a11-server-side-sohanpk24.vercel.app/api/subscribe",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
-
-      const result = await response.json();
-      if (!response.ok)
-        throw new Error(result.message || "Failed to subscribe.");
-
-      toast.success("🎉 Successfully subscribed!");
-    } catch (e) {
-      toast.error(e.message || "Failed to save data.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -44,13 +20,41 @@ const Newsletter = () => {
     e.preventDefault();
     const { name, email, age, country } = formData;
 
+    // Validation
     if (!name.trim()) return toast.error("Please enter your name");
     if (!/\S+@\S+\.\S+/.test(email)) return toast.error("Enter a valid email");
     if (!age || age < 18) return toast.error("You must be 18+ to subscribe");
     if (!country.trim()) return toast.error("Please enter your country");
 
-    await saveToDatabase({ name, email, age: parseInt(age, 10), country });
-    setFormData({ name: "", email: "", age: "", country: "" });
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("http://localhost:3000/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          age: parseInt(age, 10),
+          country,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to subscribe.");
+      }
+
+      toast.success("🎉 Successfully subscribed to our newsletter!");
+      setFormData({ name: "", email: "", age: "", country: "" });
+    } catch (error) {
+      console.error("Subscription error:", error);
+      toast.error(error.message || "Failed to subscribe. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
